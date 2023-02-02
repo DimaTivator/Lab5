@@ -3,9 +3,9 @@ package commands;
 import collectionManagement.CollectionManager;
 import collectionManagement.CollectionPrinter;
 
-public class ShowCommand extends Command {
+public class PrintUniqueMoodCommand extends Command {
 
-    public ShowCommand(CollectionManager collectionManager, CollectionPrinter collectionPrinter) {
+    public PrintUniqueMoodCommand(CollectionManager collectionManager, CollectionPrinter collectionPrinter) {
         super(collectionManager, collectionPrinter);
     }
 

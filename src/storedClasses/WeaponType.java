@@ -1,4 +1,4 @@
-package StoredClasses;
+package storedClasses;
 
 public enum WeaponType {
     AXE,

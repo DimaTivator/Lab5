@@ -1,5 +1,7 @@
 package commands;
 
+import collectionManagement.CollectionManager;
+import collectionManagement.CollectionPrinter;
 import exceptioins.commandExceptions.NoSuchCommandException;
 
 /**
@@ -10,9 +12,9 @@ public class CommandExecutor {
     /**
      * Method parseCommand takes users input and parses it. If users input is not a command,
      * method throws NoSuchCommandException
-     * @param command unparsed command
+     * @param input unparsed users input
      */
-//    public Command parseCommand(String command) throws NoSuchCommandException {
+//    public Command parseCommand(String input) throws NoSuchCommandException {
 //
 //    }
 

@@ -1,11 +1,16 @@
 package commands;
 
-public class ExitCommand implements Command {
+import collectionManagement.CollectionManager;
+import collectionManagement.CollectionPrinter;
 
-    public final CommandType type = CommandType.OTHER_COMMANDS;
+public class ExitCommand extends Command {
+
+    public ExitCommand(CollectionManager collectionManager, CollectionPrinter collectionPrinter) {
+        super(collectionManager, collectionPrinter);
+    }
 
     @Override
-    public void execute() {
+    public void execute(String[] args) {
         System.out.println("The program will end without saving the data\nWrite \"Y\" to confirm or any other word " +
                 "to undo");
         // TODO confirmation of exit

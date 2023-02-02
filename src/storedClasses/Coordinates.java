@@ -1,4 +1,4 @@
-package StoredClasses;
+package storedClasses;
 
 public class Coordinates {
     private double x; //Максимальное значение поля: 487

@@ -1,11 +1,17 @@
 package commands;
 
-public class ClearCollectionCommand implements Command {
+import collectionManagement.CollectionManager;
+import collectionManagement.CollectionPrinter;
 
-    public final CommandType type = CommandType.COLLECTION_UPDATING_COMMAND;
+public class ClearCollectionCommand extends Command {
+
+    public ClearCollectionCommand(CollectionManager collectionManager, CollectionPrinter collectionPrinter) {
+        super(collectionManager, collectionPrinter);
+    }
 
     @Override
-    public void execute() {
-
+    public void execute(String[] args) {
+        CollectionManager collectionManager = getCollectionManager();
+        collectionManager.clearCollection();
     }
 }

@@ -1,11 +1,16 @@
 package commands;
 
-public class InsertCommand implements Command {
+import collectionManagement.CollectionManager;
+import collectionManagement.CollectionPrinter;
 
-    public final CommandType type = CommandType.COLLECTION_UPDATING_COMMAND;
+public class InsertCommand extends Command {
+
+    public InsertCommand(CollectionManager collectionManager, CollectionPrinter collectionPrinter) {
+        super(collectionManager, collectionPrinter);
+    }
 
     @Override
-    public void execute() {
+    public void execute(String[] args) {
 
     }
 }
