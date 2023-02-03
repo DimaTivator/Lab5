@@ -19,4 +19,9 @@ public class Car {
     public void setCool(Boolean cool) {
         this.cool = cool;
     }
+
+    @Override
+    public String toString() {
+        return String.format("Object Car. Name: %s. Cool: %b", name, cool);
+    }
 }

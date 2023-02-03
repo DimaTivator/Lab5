@@ -14,11 +14,16 @@ public class Coordinates {
         this.y = y;
     }
 
+    public Coordinates() {}
+
     public double getX() {
         return x;
     }
 
-    public void setX(double x) {
+    public void setX(double x) throws InvalidCoordinatesException {
+        if (x > 487) {
+            throw new InvalidCoordinatesException();
+        }
         this.x = x;
     }
 
@@ -26,7 +31,15 @@ public class Coordinates {
         return y;
     }
 
-    public void setY(Float y) {
+    public void setY(Float y) throws InvalidCoordinatesException {
+        if (y <= -703) {
+            throw new InvalidCoordinatesException();
+        }
         this.y = y;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("(%.2f, %.2f)", x, y);
     }
 }

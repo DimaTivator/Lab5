@@ -17,6 +17,17 @@ public class HumanBeing {
 
     private HashSet<Long> usedID = new HashSet<>();
 
+    private Long generateId() {
+        Long randomId = (long) Math.floor(Math.random() * ((int) 1e9));
+
+        while (usedID.contains(randomId)) {
+            randomId++;
+        }
+        usedID.add(randomId);
+
+        return randomId;
+    }
+
     public HumanBeing(String name, Car car, Mood mood, WeaponType weaponType, Coordinates coordinates) {
         this.name = name;
         this.car = car;
@@ -26,12 +37,12 @@ public class HumanBeing {
 
         creationDate = java.time.LocalDate.now();
 
-        Long randomId = (long) Math.floor(Math.random() * ((int) 1e9));
-        while (usedID.contains(randomId)) {
-            randomId++;
-        }
-        usedID.add(randomId);
-        id = randomId;
+        id = generateId();
+    }
+
+    public HumanBeing() {
+        creationDate = java.time.LocalDate.now();
+        id = generateId();
     }
 
 
