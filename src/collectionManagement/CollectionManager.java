@@ -7,13 +7,27 @@ import java.util.Map;
 
 public class CollectionManager {
 
+    private final java.time.LocalDate creationDate;
+
     private Map<Long, HumanBeing> data = new LinkedHashMap<>();
+
+    public CollectionManager() {
+        creationDate = java.time.LocalDate.now();
+    }
+
+    public java.time.LocalDate getCreationDate() {
+        return creationDate;
+    }
 
     /**
      * Method returns the collection
      */
     public Map<Long, HumanBeing> getCollection() {
         return data;
+    }
+
+    public void setCollection(LinkedHashMap<Long, HumanBeing> collection) {
+        data = collection;
     }
 
     /**

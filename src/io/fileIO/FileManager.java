@@ -8,6 +8,8 @@ public abstract class FileManager {
         this.fileName = fileName;
     }
 
+    public FileManager() {}
+
     public String getFileName() {
         return fileName;
     }
@@ -15,8 +17,4 @@ public abstract class FileManager {
     public void setFileName(String fileName) {
         this.fileName = fileName;
     }
-
-    public abstract void readData(String fileName);
-
-    public abstract void writeData(String fileName);
 }

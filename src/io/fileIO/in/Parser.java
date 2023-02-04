@@ -1,12 +1,14 @@
 package io.fileIO.in;
 
-import io.fileIO.FileManager;
+import org.w3c.dom.Document;
 
-public abstract class Parser<T> extends FileManager {
+public abstract class Parser<T> extends FileReader<Document> {
 
     public Parser(String fileName) {
         super(fileName);
     }
 
-    public abstract T ParseDataToHashMap(String fileName);
+    public Parser() {};
+
+    public abstract T parseDataToHashMap(String fileName);
 }

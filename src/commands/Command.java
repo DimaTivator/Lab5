@@ -13,6 +13,14 @@ public abstract class Command {
         this.collectionPrinter = collectionPrinter;
     }
 
+    public Command(CollectionManager collectionManager) {
+        this.collectionManager = collectionManager;
+    }
+
+    public Command(CollectionPrinter collectionPrinter) {
+        this.collectionPrinter = collectionPrinter;
+    }
+
     public CollectionManager getCollectionManager() {
         return collectionManager;
     }

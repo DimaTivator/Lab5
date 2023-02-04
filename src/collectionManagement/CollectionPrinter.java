@@ -1,12 +1,10 @@
 package collectionManagement;
 
-import auxiliaryClasses.ConsoleColors;
-import storedClasses.Car;
-import storedClasses.HumanBeing;
+import commands.*;
+import storedClasses.*;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.regex.*;
 
 /**
  * Class CollectionPrinter is used to print info about the collection
@@ -46,44 +44,47 @@ public class CollectionPrinter {
     /**
      * Method printCollectionInfo prints the collection type, the date of initialization of collection and the number
      * elements in collection
-     * @param collectionInfo a Map that contains the information about the collection
+     * @param collectionManager collectionManager
      */
-    public void printCollectionInfo(Map<String, String> collectionInfo) {
-
+    public void printCollectionInfo(CollectionManager collectionManager) {
+        Command infoCommand = new InfoCommand(collectionManager, this);
+        infoCommand.execute(new String[]{});
     }
 
     /**
      * Method printCollection prints HashMap contents in (key - value) format,
      * where every pair (key - value) is printed on a separate line
-     * @param data the collection
+     * @param collectionManager collectionManager
      */
-    public void printCollection(Map<Integer, HumanBeing> data) {
-
+    public void printCollection(CollectionManager collectionManager) {
+        Command showCommand = new ShowCommand(collectionManager);
+        showCommand.execute(new String[]{});
     }
 
     /**
      * Method printUniqueMood prints the unique values of the mood field of all items in the collection
-     * @param data the collection
+     * @param collectionManager the collection
      */
-    public void printUniqueMood(Map<Integer, HumanBeing> data) {
-
+    public void printUniqueMood(CollectionManager collectionManager) {
+        Command printUniqueMoodCommand = new PrintUniqueMoodCommand(collectionManager);
+        printUniqueMoodCommand.execute(new String[]{});
     }
 
     /**
      * Method counts and prints the number of elements whose impactSpeed field value is less than the specified one
-     * @param data the collection
+     * @param collectionManager the collection
      * @param impactSpeed impactSpeed
      */
-    public void countLessThanImpactSpeed(Map<Integer, HumanBeing> data, int impactSpeed) {
+    public void countLessThanImpactSpeed(CollectionManager collectionManager, int impactSpeed) {
 
     }
 
     /**
      * Method counts and prints the number of elements whose car field value is less than the specified one
-     * @param data the collection
+     * @param collectionManager the collection
      * @param car car
      */
-    public void filterLessThanCar(Map<Integer, HumanBeing> data, Car car) {
+    public void filterLessThanCar(CollectionManager collectionManager, Car car) {
 
     }
 
@@ -91,8 +92,7 @@ public class CollectionPrinter {
      * Method prints the list of available commands
      */
     public void printHelp() {
-        commands.forEach((key, value) -> {
-            System.out.println(ConsoleColors.GREEN + key + ConsoleColors.RESET + ": " + value);
-        });
+        Command helpCommand = new HelpCommand(this);
+        helpCommand.execute(new String[]{});
     }
 }
