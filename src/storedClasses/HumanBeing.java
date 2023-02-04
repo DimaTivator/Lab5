@@ -2,8 +2,6 @@ package storedClasses;
 
 import auxiliaryClasses.ConsoleColors;
 
-import java.util.HashSet;
-
 public class HumanBeing implements Comparable<HumanBeing> {
 
     private final Long id; // Поле не может быть null, Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
@@ -17,17 +15,10 @@ public class HumanBeing implements Comparable<HumanBeing> {
     private Mood mood; // Поле не может быть null
     private Car car; // Поле может быть null
 
-    private HashSet<Long> usedID = new HashSet<>();
+    private static Long lastID = 0L;
 
     private Long generateId() {
-        Long randomId = (long) Math.floor(Math.random() * ((int) 1e9));
-
-        while (usedID.contains(randomId)) {
-            randomId++;
-        }
-        usedID.add(randomId);
-
-        return randomId;
+        return ++lastID;
     }
 
     public HumanBeing(String name, Mood mood, WeaponType weaponType, Coordinates coordinates) {
@@ -129,7 +120,7 @@ public class HumanBeing implements Comparable<HumanBeing> {
     @Override
     public String toString() {
 
-        return ConsoleColors.GREEN + "HumanBeing object:\n" + ConsoleColors.RESET +
+        return ConsoleColors.GREEN + "HumanBeing object" + ConsoleColors.RESET + ":\n" +
                 fieldToString("id", id) +
                 fieldToString("name", name) +
                 fieldToString("coordinates", coordinates) +

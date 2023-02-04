@@ -7,12 +7,12 @@ import java.util.Map;
 
 public class CollectionManager {
 
-    private Map<Integer, HumanBeing> data = new LinkedHashMap<>();
+    private Map<Long, HumanBeing> data = new LinkedHashMap<>();
 
     /**
      * Method returns the collection
      */
-    public Map<Integer, HumanBeing> getCollection() {
+    public Map<Long, HumanBeing> getCollection() {
         return data;
     }
 
