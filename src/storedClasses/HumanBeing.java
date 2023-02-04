@@ -1,10 +1,12 @@
 package storedClasses;
 
+import auxiliaryClasses.ConsoleColors;
+
 import java.util.HashSet;
 
-public class HumanBeing {
+public class HumanBeing implements Comparable<HumanBeing> {
 
-    private Long id; // Поле не может быть null, Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
+    private final Long id; // Поле не может быть null, Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
     private String name; // Поле не может быть null, Строка не может быть пустой
     private Coordinates coordinates; // Поле не может быть null
     private final java.time.LocalDate creationDate; // Поле не может быть null, Значение этого поля должно генерироваться автоматически
@@ -28,9 +30,8 @@ public class HumanBeing {
         return randomId;
     }
 
-    public HumanBeing(String name, Car car, Mood mood, WeaponType weaponType, Coordinates coordinates) {
+    public HumanBeing(String name, Mood mood, WeaponType weaponType, Coordinates coordinates) {
         this.name = name;
-        this.car = car;
         this.mood = mood;
         this.weaponType = weaponType;
         this.coordinates = coordinates;
@@ -112,5 +113,26 @@ public class HumanBeing {
 
     public void setCar(Car car) {
         this.car = car;
+    }
+
+
+    @Override
+    public int compareTo(HumanBeing obj) {
+        return id.compareTo(obj.getId());
+    }
+
+
+    private String fieldToString(String valueName, Object value) {
+        return ConsoleColors.GREEN + valueName + ConsoleColors.RESET + ": " + value + "\n";
+    }
+
+    @Override
+    public String toString() {
+
+        return ConsoleColors.GREEN + "HumanBeing object:\n" + ConsoleColors.RESET +
+                fieldToString("id", id) +
+                fieldToString("name", name) +
+                fieldToString("coordinates", coordinates) +
+                fieldToString("creation date", creationDate);
     }
 }

@@ -1,13 +1,13 @@
-package io;
+package io.consoleIO;
 
 import exceptioins.InvalidCoordinatesException;
 import exceptioins.InvalidInputException;
 
 import java.util.Scanner;
 
-public abstract class Reader<T> {
+public abstract class ConsoleReader<T> {
 
-    private Scanner scanner = new Scanner(System.in);
+    private final Scanner scanner = new Scanner(System.in);
 
     public Scanner getScanner() {
         return scanner;

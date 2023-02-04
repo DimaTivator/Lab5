@@ -1,6 +1,7 @@
-package io;
+package io.consoleIO;
 
 import exceptioins.InvalidCoordinatesException;
+import exceptioins.InvalidInputException;
 import storedClasses.Coordinates;
 
 import java.util.Scanner;
@@ -8,19 +9,19 @@ import java.util.Scanner;
 /**
  * Class for reading and parsing coordinates field of HumanBeing object
  */
-public class CoordinatesObjectReader extends Reader<Coordinates> {
+public class CoordinatesObjectReader extends ConsoleReader<Coordinates> {
 
     private Coordinates coordinates = new Coordinates();
 
     @Override
-    public Coordinates readObjectFromConsole() throws InvalidCoordinatesException {
+    public Coordinates readObjectFromConsole() throws InvalidInputException, InvalidCoordinatesException {
         Scanner scanner = getScanner();
 
         System.out.print("Coordinates (first x, then y): ");
         String[] s = scanner.nextLine().strip().replaceAll(" +", " ").replaceAll(",", ".").split(" ");
 
         if (s.length != 2) {
-            throw new InvalidCoordinatesException("Only 2 coordinates should be entered!\nPlease try again\n");
+            throw new InvalidInputException("Only 2 coordinates should be entered!\nPlease try again\n");
         }
 
         coordinates.setX(Double.parseDouble(s[0]));
