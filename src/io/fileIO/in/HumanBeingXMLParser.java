@@ -9,8 +9,8 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 import auxiliaryClasses.ConsoleColors;
-import exceptioins.InvalidCoordinatesException;
-import exceptioins.ParseException;
+import exceptions.InvalidCoordinatesException;
+import exceptions.ParseException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;

@@ -10,7 +10,7 @@ public class ReplaceIfGreaterCommand extends Command {
     }
 
     @Override
-    public void execute(String[] args) {
+    public void execute() {
 
     }
 }

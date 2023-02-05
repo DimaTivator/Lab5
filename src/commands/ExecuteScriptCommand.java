@@ -10,7 +10,7 @@ public class ExecuteScriptCommand extends Command {
     }
 
     @Override
-    public void execute(String[] args) {
+    public void execute() {
 
     }
 }

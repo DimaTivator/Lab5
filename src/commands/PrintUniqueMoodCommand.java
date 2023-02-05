@@ -17,7 +17,7 @@ public class PrintUniqueMoodCommand extends Command {
     }
 
     @Override
-    public void execute(String[] args) {
+    public void execute() {
         Map<Long, HumanBeing> data = getCollectionManager().getCollection();
         Map<Mood, Integer> moodsCounter = new HashMap<>();
 

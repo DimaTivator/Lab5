@@ -1,7 +1,7 @@
-package io.consoleIO;
+package io.consoleIO.humanBeingInput;
 
-import exceptioins.InvalidCoordinatesException;
-import exceptioins.InvalidInputException;
+import exceptions.InvalidCoordinatesException;
+import exceptions.InvalidInputException;
 import storedClasses.*;
 
 import java.util.Scanner;

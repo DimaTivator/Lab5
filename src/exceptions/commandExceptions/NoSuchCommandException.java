@@ -1,4 +1,4 @@
-package exceptioins.commandExceptions;
+package exceptions.commandExceptions;
 
 import auxiliaryClasses.ConsoleColors;
 

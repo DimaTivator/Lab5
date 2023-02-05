@@ -1,4 +1,4 @@
-package exceptioins;
+package exceptions;
 
 import auxiliaryClasses.ConsoleColors;
 

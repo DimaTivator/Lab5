@@ -12,7 +12,7 @@ public class ShowCommand extends Command {
     }
 
     @Override
-    public void execute(String[] args) {
+    public void execute() {
         Map<Long, HumanBeing> data = getCollectionManager().getCollection();
         data.forEach((key, value) -> System.out.println(key + ":\n" + value));
     }

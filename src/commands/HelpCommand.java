@@ -13,12 +13,13 @@ public class HelpCommand extends Command {
     }
 
     @Override
-    public void execute(String[] args) {
+    public void execute() {
         CollectionManager collectionManager = getCollectionManager();
         CollectionPrinter collectionPrinter = getCollectionPrinter();
         Map<String, String> commands = collectionPrinter.getCommands();
         commands.forEach((key, value) -> {
             System.out.println(ConsoleColors.GREEN + key + ConsoleColors.RESET + ": " + value);
         });
+        System.out.println();
     }
 }

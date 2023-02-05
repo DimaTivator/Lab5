@@ -21,6 +21,8 @@ public abstract class Command {
         this.collectionPrinter = collectionPrinter;
     }
 
+    public Command() {};
+
     public CollectionManager getCollectionManager() {
         return collectionManager;
     }
@@ -29,5 +31,5 @@ public abstract class Command {
         return collectionPrinter;
     }
 
-    public abstract void execute(String[] args);
+    public abstract void execute();
 }

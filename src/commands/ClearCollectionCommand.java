@@ -10,7 +10,7 @@ public class ClearCollectionCommand extends Command {
     }
 
     @Override
-    public void execute(String[] args) {
+    public void execute() {
         CollectionManager collectionManager = getCollectionManager();
         collectionManager.clearCollection();
     }

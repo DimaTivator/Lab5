@@ -48,7 +48,7 @@ public class CollectionPrinter {
      */
     public void printCollectionInfo(CollectionManager collectionManager) {
         Command infoCommand = new InfoCommand(collectionManager, this);
-        infoCommand.execute(new String[]{});
+        infoCommand.execute();
     }
 
     /**
@@ -58,7 +58,7 @@ public class CollectionPrinter {
      */
     public void printCollection(CollectionManager collectionManager) {
         Command showCommand = new ShowCommand(collectionManager);
-        showCommand.execute(new String[]{});
+        showCommand.execute();
     }
 
     /**
@@ -67,7 +67,7 @@ public class CollectionPrinter {
      */
     public void printUniqueMood(CollectionManager collectionManager) {
         Command printUniqueMoodCommand = new PrintUniqueMoodCommand(collectionManager);
-        printUniqueMoodCommand.execute(new String[]{});
+        printUniqueMoodCommand.execute();
     }
 
     /**
@@ -75,7 +75,7 @@ public class CollectionPrinter {
      * @param collectionManager the collection
      * @param impactSpeed impactSpeed
      */
-    public void countLessThanImpactSpeed(CollectionManager collectionManager, int impactSpeed) {
+    public void countLessThanImpactSpeed(CollectionManager collectionManager, Double impactSpeed) {
 
     }
 
@@ -88,11 +88,19 @@ public class CollectionPrinter {
 
     }
 
+    public void saveCollectionToFile() {
+        // save to file with standard name
+    }
+
+    public void saveCollectionToFile(String filePath) {
+
+    }
+
     /**
      * Method prints the list of available commands
      */
     public void printHelp() {
         Command helpCommand = new HelpCommand(this);
-        helpCommand.execute(new String[]{});
+        helpCommand.execute();
     }
 }

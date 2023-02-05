@@ -10,7 +10,7 @@ public class SaveCollectionToFileCommand extends Command {
     }
 
     @Override
-    public void execute(String[] args) {
+    public void execute() {
 
     }
 }

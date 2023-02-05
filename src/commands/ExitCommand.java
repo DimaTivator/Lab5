@@ -2,18 +2,19 @@ package commands;
 
 import collectionManagement.CollectionManager;
 import collectionManagement.CollectionPrinter;
+import io.consoleIO.ConfirmationReader;
 
 public class ExitCommand extends Command {
 
-    public ExitCommand(CollectionManager collectionManager, CollectionPrinter collectionPrinter) {
-        super(collectionManager, collectionPrinter);
-    }
+    public ExitCommand() {}
 
     @Override
-    public void execute(String[] args) {
-        System.out.println("The program will end without saving the data\nWrite \"Y\" to confirm or any other word " +
-                "to undo");
-        // TODO confirmation of exit
-        System.exit(0);
+    public void execute() {
+        System.out.println("The program will end without saving the data\n");
+        ConfirmationReader confirmationReader = new ConfirmationReader();
+        String confirmation = confirmationReader.readObjectFromConsole();
+        if (confirmation.equals("Y")) {
+            System.exit(0);
+        }
     }
 }

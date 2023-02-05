@@ -35,7 +35,7 @@ public class CollectionManager {
      * @param key key
      * @param value value
      */
-    public void insertElement(int key, HumanBeing value) {
+    public void insertElement(Long key, HumanBeing value) {
 
     }
 
@@ -44,7 +44,7 @@ public class CollectionManager {
      * @param key key
      * @param value new value
      */
-    public void updateValueByKey(int key, HumanBeing value) {
+    public void updateValueByKey(Long key, HumanBeing value) {
 
     }
 
@@ -52,7 +52,7 @@ public class CollectionManager {
      * Method removes from the collection the pair by the specified key
      * @param key key
      */
-    public void removeByKey(int key) {
+    public void removeByKey(Long key) {
 
     }
 
@@ -76,7 +76,7 @@ public class CollectionManager {
      * @param key key
      * @param value value
      */
-    public void replaceIfGreater(int key, HumanBeing value) {
+    public void replaceIfGreater(Long key, HumanBeing value) {
 
     }
 
@@ -84,7 +84,7 @@ public class CollectionManager {
      * Method removes from the collection all items which key is greater than the specified one
      * @param key key
      */
-    public void removeGreaterKey(int key) {
+    public void removeGreaterKey(Long key) {
 
     }
 }

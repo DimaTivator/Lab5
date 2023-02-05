@@ -1,6 +1,7 @@
-package io.consoleIO;
+package io.consoleIO.humanBeingInput;
 
-import exceptioins.InvalidInputException;
+import exceptions.InvalidInputException;
+import io.consoleIO.ConsoleReader;
 import storedClasses.WeaponType;
 
 import java.util.ArrayList;

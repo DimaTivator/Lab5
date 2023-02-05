@@ -1,8 +1,5 @@
 package io.consoleIO;
 
-import exceptioins.InvalidCoordinatesException;
-import exceptioins.InvalidInputException;
-
 import java.util.Scanner;
 
 public abstract class ConsoleReader<T> {
@@ -13,5 +10,5 @@ public abstract class ConsoleReader<T> {
         return scanner;
     }
 
-    public abstract T readObjectFromConsole() throws InvalidInputException, InvalidCoordinatesException;
+    public abstract T readObjectFromConsole() throws Exception;
 }

@@ -11,7 +11,7 @@ public class InfoCommand extends Command {
     }
 
     @Override
-    public void execute(String[] args) {
+    public void execute() {
 
         CollectionManager collectionManager = getCollectionManager();
 
@@ -24,5 +24,6 @@ public class InfoCommand extends Command {
         System.out.println(ConsoleColors.GREEN + "Number of elements in collection: " + ConsoleColors.RESET +
                 collectionManager.getCollection().size());
 
+        System.out.println();
     }
 }

@@ -10,7 +10,7 @@ public class FilterLessThanCarCommand extends Command {
     }
 
     @Override
-    public void execute(String[] args) {
+    public void execute() {
         CollectionPrinter collectionPrinter = getCollectionPrinter();
         CollectionManager collectionManager = getCollectionManager();
         // TODO parsing args

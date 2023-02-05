@@ -1,6 +1,6 @@
 package storedClasses;
 
-import exceptioins.InvalidCoordinatesException;
+import exceptions.InvalidCoordinatesException;
 
 public class Coordinates {
     private double x; // Максимальное значение поля: 487
