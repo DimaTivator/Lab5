@@ -31,5 +31,5 @@ public abstract class Command {
         return collectionPrinter;
     }
 
-    public abstract void execute();
+    public abstract void execute() throws Exception;
 }

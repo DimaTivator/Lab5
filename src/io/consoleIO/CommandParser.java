@@ -40,11 +40,11 @@ public class CommandParser extends ConsoleReader<Pair<String, String[]>> {
     @Override
     public Pair<String, String[]> readObjectFromConsole() throws NoSuchCommandException {
         Scanner scanner = getScanner();
-        System.out.println(ConsoleColors.BLACK_BRIGHT + "Enter a command:" + ConsoleColors.RESET);
+        System.out.print(ConsoleColors.BLUE_BRIGHT + "Enter a command: " + ConsoleColors.RESET);
         List<String> line = Arrays.stream(scanner.nextLine().strip().replaceAll(" +", " ").split(" ")).toList();
 
         if (!commandsList.contains(line.get(0))) {
-            throw new NoSuchCommandException("Can't find command in commands list\n Please try to enter command again\n");
+            throw new NoSuchCommandException("Can't find command in commands list\nPlease try to enter command again\n");
         }
 
         String command = line.get(0);

@@ -1,5 +1,7 @@
 package collectionManagement;
 
+import commands.Command;
+import commands.InsertCommand;
 import storedClasses.HumanBeing;
 
 import java.util.LinkedHashMap;
@@ -36,7 +38,12 @@ public class CollectionManager {
      * @param value value
      */
     public void insertElement(Long key, HumanBeing value) {
-
+        try {
+            Command insertCommand = new InsertCommand(this, key, value);
+            insertCommand.execute();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     /**

@@ -47,8 +47,10 @@ public class CollectionPrinter {
      * @param collectionManager collectionManager
      */
     public void printCollectionInfo(CollectionManager collectionManager) {
-        Command infoCommand = new InfoCommand(collectionManager, this);
-        infoCommand.execute();
+        try {
+            Command infoCommand = new InfoCommand(collectionManager, this);
+            infoCommand.execute();
+        } catch (Exception ignored) {}
     }
 
     /**
@@ -57,8 +59,12 @@ public class CollectionPrinter {
      * @param collectionManager collectionManager
      */
     public void printCollection(CollectionManager collectionManager) {
-        Command showCommand = new ShowCommand(collectionManager);
-        showCommand.execute();
+        try {
+            Command showCommand = new ShowCommand(collectionManager);
+            showCommand.execute();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     /**
@@ -66,8 +72,12 @@ public class CollectionPrinter {
      * @param collectionManager the collection
      */
     public void printUniqueMood(CollectionManager collectionManager) {
-        Command printUniqueMoodCommand = new PrintUniqueMoodCommand(collectionManager);
-        printUniqueMoodCommand.execute();
+        try {
+            Command printUniqueMoodCommand = new PrintUniqueMoodCommand(collectionManager);
+            printUniqueMoodCommand.execute();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     /**
@@ -76,7 +86,12 @@ public class CollectionPrinter {
      * @param impactSpeed impactSpeed
      */
     public void countLessThanImpactSpeed(CollectionManager collectionManager, Double impactSpeed) {
-
+        try {
+            Command countLessThanImpactSpeedCommand = new CountLessThanImpactSpeedCommand(collectionManager, impactSpeed);
+            countLessThanImpactSpeedCommand.execute();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     /**
@@ -100,7 +115,9 @@ public class CollectionPrinter {
      * Method prints the list of available commands
      */
     public void printHelp() {
-        Command helpCommand = new HelpCommand(this);
-        helpCommand.execute();
+        try {
+            Command helpCommand = new HelpCommand(this);
+            helpCommand.execute();
+        } catch (Exception ignored) {}
     }
 }

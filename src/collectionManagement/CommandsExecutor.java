@@ -5,6 +5,7 @@ import commands.ExecuteScriptCommand;
 import commands.ExitCommand;
 import dataStructures.Pair;
 import exceptions.commandExceptions.InvalidArgumentsException;
+import io.consoleIO.humanBeingInput.CarObjectReader;
 import io.consoleIO.humanBeingInput.HumanBeingObjectReader;
 import storedClasses.HumanBeing;
 
@@ -91,7 +92,7 @@ public class CommandsExecutor {
 
             case ("clear") -> {
                 if (args.length != 0) {
-                    throw new InvalidArgumentsException();
+                    throw new InvalidArgumentsException("Command 'clear' doesn't have any arguments");
                 }
                 collectionManager.clearCollection();
             }
@@ -115,11 +116,15 @@ public class CommandsExecutor {
             }
 
             case ("exit") -> {
-                if (args.length != 1) {
+                if (args.length != 0) {
                     throw new InvalidArgumentsException();
                 }
-                Command exitCommand = new ExitCommand();
-                exitCommand.execute();
+                try {
+                    Command exitCommand = new ExitCommand();
+                    exitCommand.execute();
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
             }
 
             case ("remove_lower") -> {
@@ -169,11 +174,24 @@ public class CommandsExecutor {
             }
 
             case ("filter_less_than_car") -> {
-                // TODO
+                if (args.length != 0) {
+                    throw new InvalidArgumentsException("Something wrong with command arguments :(\n" +
+                            "Please check that you do not enter any arguments in the same line with the command");
+                }
+                try {
+                    CarObjectReader carObjectReader = new CarObjectReader();
+                    collectionPrinter.filterLessThanCar(collectionManager, carObjectReader.readObjectFromConsole());
+                } catch (Exception e) {
+                    throw new InvalidArgumentsException();
+                }
             }
 
             case ("print_unique_mood") -> {
-                // TODO
+                if (args.length != 0) {
+                    throw new InvalidArgumentsException("Something wrong with command arguments :(\n" +
+                            "Please check that you do not enter any arguments in the same line with the command");
+                }
+                collectionPrinter.printUniqueMood(collectionManager);
             }
         }
     }
