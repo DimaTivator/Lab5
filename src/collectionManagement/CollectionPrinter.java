@@ -100,15 +100,26 @@ public class CollectionPrinter {
      * @param car car
      */
     public void filterLessThanCar(CollectionManager collectionManager, Car car) {
-
+        try {
+            Command filterLessThanCarCommand = new FilterLessThanCarCommand(collectionManager, car);
+            filterLessThanCarCommand.execute();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
-    public void saveCollectionToFile() {
-        // save to file with standard name
+    public void saveCollectionToFile(CollectionManager collectionManager) {
+        try {
+            Command saveCollectionToFileCommand = new SaveCollectionToFileCommand(collectionManager);
+            saveCollectionToFileCommand.execute();
+        } catch (Exception ignored) {}
     }
 
-    public void saveCollectionToFile(String filePath) {
-
+    public void saveCollectionToFile(CollectionManager collectionManager, String filePath) {
+        try {
+            Command saveCollectionToFileCommand = new SaveCollectionToFileCommand(collectionManager, filePath);
+            saveCollectionToFileCommand.execute();
+        } catch (Exception ignored) {}
     }
 
     /**

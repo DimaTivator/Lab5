@@ -1,4 +1,4 @@
-package io.consoleIO.humanBeingInput;
+package io.humanBeingInput;
 
 import exceptions.InvalidInputException;
 import io.consoleIO.ConsoleReader;
@@ -9,13 +9,11 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-public class MoodReader extends ConsoleReader<Mood> {
-
-    private Mood mood;
+public class MoodConsoleReader extends ConsoleReader<Mood> {
 
     @Override
     public Mood readObjectFromConsole() throws InvalidInputException {
-        Scanner scanner = getScanner();
+        Scanner scanner = getConsoleScanner();
 
         System.out.println("Enter one of the following moods:");
 
@@ -32,8 +30,6 @@ public class MoodReader extends ConsoleReader<Mood> {
             throw new InvalidInputException("You should choose mood from the available moods!\nPlease try again\n");
         }
 
-        mood = Mood.valueOf(input);
-
-        return mood;
+        return Mood.valueOf(input);
     }
 }

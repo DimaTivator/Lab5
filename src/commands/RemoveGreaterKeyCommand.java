@@ -8,13 +8,13 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-public class RemoveLowerCommand extends Command {
+public class RemoveGreaterKeyCommand extends Command {
 
-    private final HumanBeing humanBeing;
+    private final Long inputKey;
 
-    public RemoveLowerCommand(CollectionManager collectionManager, HumanBeing humanBeing) {
+    public RemoveGreaterKeyCommand(CollectionManager collectionManager, Long inputKey) {
         super(collectionManager);
-        this.humanBeing = humanBeing;
+        this.inputKey = inputKey;
     }
 
     @Override
@@ -28,7 +28,7 @@ public class RemoveLowerCommand extends Command {
         Set<Long> keySet = new HashSet<>();
 
         data.forEach((key, value) -> {
-            if (value.compareTo(humanBeing) < 0) {
+            if (key.compareTo(inputKey) > 0) {
                 keySet.add(key);
             }
         });

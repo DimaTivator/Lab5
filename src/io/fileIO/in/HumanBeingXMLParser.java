@@ -19,7 +19,6 @@ import storedClasses.*;
 
 public class HumanBeingXMLParser extends Parser<LinkedHashMap<Long, HumanBeing>> {
 
-    @Override
     public Document readData(String fileName) {
 
         try {

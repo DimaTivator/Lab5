@@ -3,7 +3,7 @@ package storedClasses;
 /**
  Class representing a Car object.
  */
-public class Car {
+public class Car implements Comparable<Car> {
     /** The name of the car. Can be null. */
     private String name;
     /** The coolness of the car. Can be null. */
@@ -46,6 +46,18 @@ public class Car {
      */
     public void setCool(Boolean cool) {
         this.cool = cool;
+    }
+
+    @Override
+    public int compareTo(Car obj) {
+        if (obj.getName() == null) {
+            return 1;
+        }
+        if (name == null) {
+            return -1;
+        }
+
+        return name.compareTo(obj.getName());
     }
 
     /**

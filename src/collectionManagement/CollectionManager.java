@@ -1,7 +1,6 @@
 package collectionManagement;
 
-import commands.Command;
-import commands.InsertCommand;
+import commands.*;
 import storedClasses.HumanBeing;
 
 import java.util.LinkedHashMap;
@@ -41,18 +40,17 @@ public class CollectionManager {
         try {
             Command insertCommand = new InsertCommand(this, key, value);
             insertCommand.execute();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
+        } catch (Exception ignored) {}
     }
 
     /**
      * Method updates the value in the collection by the specified key
-     * @param key key
-     * @param value new value
      */
-    public void updateValueByKey(Long key, HumanBeing value) {
-
+    public void updateValueByKey(Long key, HumanBeing newValue) {
+        try {
+            Command updateCommand = new UpdateCommand(this, key, newValue);
+            updateCommand.execute();
+        } catch (Exception ignored) {}
     }
 
     /**
@@ -60,14 +58,20 @@ public class CollectionManager {
      * @param key key
      */
     public void removeByKey(Long key) {
-
+        try {
+            Command removeKeyCommand = new RemoveKeyCommmand(this, key);
+            removeKeyCommand.execute();
+        } catch (Exception ignored) {}
     }
 
     /**
      * Method clears the collection
      */
     public void clearCollection() {
-
+        try {
+            Command clearCollectionCommand = new ClearCollectionCommand(this);
+            clearCollectionCommand.execute();
+        } catch (Exception ignored) {}
     }
 
     /**
@@ -75,7 +79,12 @@ public class CollectionManager {
      * @param value value
      */
     public void removeLower(HumanBeing value) {
-
+        try {
+            Command removeLowerCommand = new RemoveLowerCommand(this, value);
+            removeLowerCommand.execute();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     /**
@@ -84,7 +93,10 @@ public class CollectionManager {
      * @param value value
      */
     public void replaceIfGreater(Long key, HumanBeing value) {
-
+        try {
+            Command replaceIfGreaterCommand = new ReplaceIfGreaterCommand(this, key, value);
+            replaceIfGreaterCommand.execute();
+        } catch (Exception ignored) {}
     }
 
     /**
@@ -92,6 +104,11 @@ public class CollectionManager {
      * @param key key
      */
     public void removeGreaterKey(Long key) {
-
+        try {
+            Command removeGreaterKeyCommand = new RemoveGreaterKeyCommand(this, key);
+            removeGreaterKeyCommand.execute();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 }

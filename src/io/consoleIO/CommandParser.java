@@ -1,9 +1,7 @@
 package io.consoleIO;
 
 import auxiliaryClasses.ConsoleColors;
-import commands.Command;
 import dataStructures.Pair;
-import exceptions.commandExceptions.InvalidArgumentsException;
 import exceptions.commandExceptions.NoSuchCommandException;
 
 import java.util.ArrayList;
@@ -39,8 +37,12 @@ public class CommandParser extends ConsoleReader<Pair<String, String[]>> {
 
     @Override
     public Pair<String, String[]> readObjectFromConsole() throws NoSuchCommandException {
-        Scanner scanner = getScanner();
+        Scanner scanner = getConsoleScanner();
         System.out.print(ConsoleColors.BLUE_BRIGHT + "Enter a command: " + ConsoleColors.RESET);
+        return getStringPair(scanner);
+    }
+
+    private Pair<String, String[]> getStringPair(Scanner scanner) throws NoSuchCommandException {
         List<String> line = Arrays.stream(scanner.nextLine().strip().replaceAll(" +", " ").split(" ")).toList();
 
         if (!commandsList.contains(line.get(0))) {
@@ -51,5 +53,10 @@ public class CommandParser extends ConsoleReader<Pair<String, String[]>> {
         String[] args = line.subList(1, line.size()).toArray(new String[0]);
 
         return new Pair<>(command, args);
+    }
+
+    public Pair<String, String[]> parseCommandFromFile(Scanner fileScanner) throws NoSuchCommandException {
+
+        return getStringPair(fileScanner);
     }
 }

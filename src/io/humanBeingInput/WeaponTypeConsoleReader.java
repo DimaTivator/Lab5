@@ -1,4 +1,4 @@
-package io.consoleIO.humanBeingInput;
+package io.humanBeingInput;
 
 import exceptions.InvalidInputException;
 import io.consoleIO.ConsoleReader;
@@ -9,13 +9,11 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-public class WeaponTypeReader extends ConsoleReader<WeaponType> {
-
-    private WeaponType weaponType;
+public class WeaponTypeConsoleReader extends ConsoleReader<WeaponType> {
 
     @Override
     public WeaponType readObjectFromConsole() throws InvalidInputException {
-        Scanner scanner = getScanner();
+        Scanner scanner = getConsoleScanner();
 
         System.out.println("Enter one of the following weapon types:");
 
@@ -32,8 +30,6 @@ public class WeaponTypeReader extends ConsoleReader<WeaponType> {
             throw new InvalidInputException("You should choose mood from the available weapon types!\nPlease try again\n");
         }
 
-        weaponType = WeaponType.valueOf(input);
-
-        return weaponType;
+        return WeaponType.valueOf(input);
     }
 }

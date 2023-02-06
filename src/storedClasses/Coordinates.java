@@ -2,7 +2,7 @@ package storedClasses;
 
 import exceptions.InvalidCoordinatesException;
 
-public class Coordinates {
+public class Coordinates implements Comparable<Coordinates> {
     private double x; // Максимальное значение поля: 487
     private Float y; // Значение поля должно быть больше -703, Поле не может быть null
 
@@ -36,6 +36,15 @@ public class Coordinates {
             throw new InvalidCoordinatesException();
         }
         this.y = y;
+    }
+
+    @Override
+    public int compareTo(Coordinates obj) {
+        int result = Double.compare(this.x, obj.x);
+        if (result == 0) {
+            result = this.y.compareTo(obj.y);
+        }
+        return result;
     }
 
     @Override

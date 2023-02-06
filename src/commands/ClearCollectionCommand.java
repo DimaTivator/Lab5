@@ -1,17 +1,19 @@
 package commands;
 
 import collectionManagement.CollectionManager;
-import collectionManagement.CollectionPrinter;
+import storedClasses.HumanBeing;
+
+import java.util.Map;
 
 public class ClearCollectionCommand extends Command {
 
-    public ClearCollectionCommand(CollectionManager collectionManager, CollectionPrinter collectionPrinter) {
-        super(collectionManager, collectionPrinter);
+    public ClearCollectionCommand(CollectionManager collectionManager) {
+        super(collectionManager);
     }
 
     @Override
     public void execute() {
-        CollectionManager collectionManager = getCollectionManager();
-        collectionManager.clearCollection();
+        Map<Long, HumanBeing> data = getCollectionManager().getCollection();
+        data.clear();
     }
 }

@@ -1,4 +1,4 @@
-package io.consoleIO.humanBeingInput;
+package io.humanBeingInput;
 
 import exceptions.InvalidCoordinatesException;
 import exceptions.InvalidInputException;
@@ -10,15 +10,19 @@ import java.util.Scanner;
 /**
  * Class for reading and parsing coordinates field of HumanBeing object
  */
-public class CoordinatesObjectReader extends ConsoleReader<Coordinates> {
+public class CoordinatesObjectConsoleReader extends ConsoleReader<Coordinates> {
 
-    private Coordinates coordinates = new Coordinates();
+    private final Coordinates coordinates = new Coordinates();
 
     @Override
     public Coordinates readObjectFromConsole() throws InvalidInputException, InvalidCoordinatesException {
-        Scanner scanner = getScanner();
+        Scanner scanner = getConsoleScanner();
 
         System.out.print("Coordinates (first x, then y): ");
+        return getCoordinates(scanner, coordinates);
+    }
+
+    static Coordinates getCoordinates(Scanner scanner, Coordinates coordinates) throws InvalidInputException, InvalidCoordinatesException {
         String[] s = scanner.nextLine().strip().replaceAll(" +", " ").replaceAll(",", ".").split(" ");
 
         if (s.length != 2) {

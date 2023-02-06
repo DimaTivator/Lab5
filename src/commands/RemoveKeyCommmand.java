@@ -1,16 +1,22 @@
 package commands;
 
 import collectionManagement.CollectionManager;
-import collectionManagement.CollectionPrinter;
+import storedClasses.HumanBeing;
+
+import java.util.Map;
 
 public class RemoveKeyCommmand extends Command {
 
-    public RemoveKeyCommmand(CollectionManager collectionManager, CollectionPrinter collectionPrinter) {
-        super(collectionManager, collectionPrinter);
+    private final Long key;
+
+    public RemoveKeyCommmand(CollectionManager collectionManager, Long key) {
+        super(collectionManager);
+        this.key = key;
     }
 
     @Override
     public void execute() {
-
+        Map<Long, HumanBeing> data = getCollectionManager().getCollection();
+        data.remove(key);
     }
 }

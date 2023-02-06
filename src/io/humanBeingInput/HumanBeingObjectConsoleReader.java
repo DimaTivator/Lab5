@@ -1,4 +1,4 @@
-package io.consoleIO.humanBeingInput;
+package io.humanBeingInput;
 
 import exceptions.InvalidCoordinatesException;
 import exceptions.InvalidInputException;
@@ -6,7 +6,7 @@ import storedClasses.*;
 
 import java.util.Scanner;
 
-public class HumanBeingObjectReader {
+public class HumanBeingObjectConsoleReader {
 
     private static final Scanner scanner = new Scanner(System.in);
 
@@ -67,7 +67,7 @@ public class HumanBeingObjectReader {
         }
 
         Coordinates coordinates;
-        CoordinatesObjectReader coordinatesObjectReader = new CoordinatesObjectReader();
+        CoordinatesObjectConsoleReader coordinatesObjectReader = new CoordinatesObjectConsoleReader();
         while (true) {
             try {
                 coordinates = coordinatesObjectReader.readObjectFromConsole();
@@ -78,7 +78,7 @@ public class HumanBeingObjectReader {
         }
 
         WeaponType weaponType;
-        WeaponTypeReader weaponTypeReader = new WeaponTypeReader();
+        WeaponTypeConsoleReader weaponTypeReader = new WeaponTypeConsoleReader();
         while (true) {
             try {
                 weaponType = weaponTypeReader.readObjectFromConsole();
@@ -89,7 +89,7 @@ public class HumanBeingObjectReader {
         }
 
         Mood mood;
-        MoodReader moodReader = new MoodReader();
+        MoodConsoleReader moodReader = new MoodConsoleReader();
         while (true) {
             try {
                 mood = moodReader.readObjectFromConsole();
@@ -143,7 +143,7 @@ public class HumanBeingObjectReader {
 
         if (checkTheDesireToEnter("Car")) {
             Car car;
-            CarObjectReader carObjetReader = new CarObjectReader();
+            CarObjectConsoleReader carObjetReader = new CarObjectConsoleReader();
             while (true) {
                 try {
                     car = carObjetReader.readObjectFromConsole();

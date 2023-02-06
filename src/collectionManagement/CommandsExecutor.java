@@ -4,27 +4,39 @@ import commands.Command;
 import commands.ExecuteScriptCommand;
 import commands.ExitCommand;
 import dataStructures.Pair;
+import exceptions.NoSuchKeyException;
+import exceptions.OccupiedKeyException;
 import exceptions.commandExceptions.InvalidArgumentsException;
-import io.consoleIO.humanBeingInput.CarObjectReader;
-import io.consoleIO.humanBeingInput.HumanBeingObjectReader;
+import io.humanBeingInput.CarObjectConsoleReader;
+import io.humanBeingInput.CarObjectFileReader;
+import io.humanBeingInput.HumanBeingObjectConsoleReader;
+import io.humanBeingInput.HumanBeingObjectFileReader;
+import storedClasses.Car;
 import storedClasses.HumanBeing;
+
+import java.util.Scanner;
 
 public class CommandsExecutor {
 
-    private CollectionPrinter collectionPrinter;
-    private CollectionManager collectionManager;
+    private final CollectionPrinter collectionPrinter;
+    private final CollectionManager collectionManager;
 
     public CommandsExecutor(CollectionManager collectionManager, CollectionPrinter collectionPrinter) {
         this.collectionManager = collectionManager;
         this.collectionPrinter = collectionPrinter;
     }
 
-    private HumanBeing getHumanBeing() {
-        HumanBeingObjectReader humanBeingObjectReader = new HumanBeingObjectReader();
+    private HumanBeing getHumanBeingFromConsole() {
+        HumanBeingObjectConsoleReader humanBeingObjectReader = new HumanBeingObjectConsoleReader();
         return humanBeingObjectReader.readHumanBeingFromConsole();
     }
 
-    public void execute(Pair<String, String[]> commandPair) throws InvalidArgumentsException {
+    private HumanBeing getHumanBeingFromFile(Scanner fileScanner) {
+        HumanBeingObjectFileReader humanBeingObjectFileReader = new HumanBeingObjectFileReader(fileScanner);
+        return humanBeingObjectFileReader.readHumanBeingFromFile();
+    }
+
+    public void execute(Pair<String, String[]> commandPair, String stream, Scanner scanner) throws Exception {
         String command = commandPair.getFirst();
         String[] args = commandPair.getSecond();
 
@@ -32,21 +44,24 @@ public class CommandsExecutor {
 
             case ("help") -> {
                 if (args.length != 0) {
-                    throw new InvalidArgumentsException();
+                    throw new InvalidArgumentsException("Command 'help' takes no arguments!" +
+                            "Please try to enter command again");
                 }
                 collectionPrinter.printHelp();
             }
 
             case ("info") -> {
                 if (args.length != 0) {
-                    throw new InvalidArgumentsException();
+                    throw new InvalidArgumentsException("Command 'info' takes no arguments!" +
+                            "Please try to enter command again");
                 }
                 collectionPrinter.printCollectionInfo(collectionManager);
             }
 
             case ("show") -> {
                 if (args.length != 0) {
-                    throw new InvalidArgumentsException();
+                    throw new InvalidArgumentsException("Command 'show' takes no arguments!" +
+                            "Please try to enter command again");
                 }
                 collectionPrinter.printCollection(collectionManager);
             }
@@ -58,8 +73,20 @@ public class CommandsExecutor {
                 }
                 try {
                     Long key = Long.parseLong(args[0]);
-                    collectionManager.insertElement(key, getHumanBeing());
+
+                    if (collectionManager.getCollection().containsKey(key)) {
+                        throw new OccupiedKeyException("Collection already contains the object with this key!\n" +
+                                "Please try to enter another key");
+                    }
+
+                    if (stream.equals("console")) {
+                        collectionManager.insertElement(key, getHumanBeingFromConsole());
+                    } else if (stream.equals("file")) {
+                        collectionManager.insertElement(key, getHumanBeingFromFile(scanner));
+                    }
+
                 } catch(Exception e) {
+                    System.out.println(e.getMessage());
                     throw new InvalidArgumentsException();
                 }
             }
@@ -71,8 +98,22 @@ public class CommandsExecutor {
                 }
                 try {
                     Long key = Long.parseLong(args[0]);
-                    collectionManager.updateValueByKey(key, getHumanBeing());
+
+                    if (collectionManager.getCollection().containsKey(key)) {
+
+                        if (stream.equals("console")) {
+                            collectionManager.updateValueByKey(key, getHumanBeingFromConsole());
+                        } else {
+                            collectionManager.updateValueByKey(key, getHumanBeingFromFile(scanner));
+                        }
+
+                    } else {
+                        throw new NoSuchKeyException("Can't find the entered key in the collection :(\n" +
+                                "Please try to enter command again");
+                    }
+
                 } catch(Exception e) {
+                    System.out.println(e.getMessage());
                     throw new InvalidArgumentsException();
                 }
             }
@@ -83,8 +124,16 @@ public class CommandsExecutor {
                 }
                 try {
                     Long key = Long.parseLong(args[0]);
-                    collectionManager.removeByKey(key);
+
+                    if (collectionManager.getCollection().containsKey(key)) {
+                        collectionManager.removeByKey(key);
+                    } else {
+                        throw new NoSuchKeyException("Can't find the entered key in the collection :(\n" +
+                                "Please try to enter command again");
+                    }
+
                 } catch(Exception e) {
+                    System.out.println(e.getMessage());
                     throw new InvalidArgumentsException("Something wrong with command arguments :(\n" +
                             "Please check that you enter key in the same line with the name of command");
                 }
@@ -99,9 +148,9 @@ public class CommandsExecutor {
 
             case ("save") -> {
                 if (args.length == 0) {
-                    collectionPrinter.saveCollectionToFile();
+                    collectionPrinter.saveCollectionToFile(collectionManager);
                 } else if (args.length == 1) {
-                    collectionPrinter.saveCollectionToFile(args[0]);
+                    collectionPrinter.saveCollectionToFile(collectionManager, args[0]);
                 } else {
                     throw new InvalidArgumentsException();
                 }
@@ -111,8 +160,8 @@ public class CommandsExecutor {
                 if (args.length != 1) {
                     throw new InvalidArgumentsException();
                 }
-                // TODO
-                // Command executeScriptCommand = new ExecuteScriptCommand();
+                Command executeScriptCommand = new ExecuteScriptCommand(collectionManager, collectionPrinter, args[0]);
+                executeScriptCommand.execute();
             }
 
             case ("exit") -> {
@@ -131,7 +180,12 @@ public class CommandsExecutor {
                 if (args.length != 0) {
                     throw new InvalidArgumentsException();
                 }
-                collectionManager.removeLower(getHumanBeing());
+
+                if (stream.equals("console")) {
+                    collectionManager.removeLower(getHumanBeingFromConsole());
+                } else {
+                    collectionManager.removeLower(getHumanBeingFromFile(scanner));
+                }
             }
 
             case ("replace_if_greater") -> {
@@ -141,8 +195,22 @@ public class CommandsExecutor {
                 }
                 try {
                     Long key = Long.parseLong(args[0]);
-                    collectionManager.replaceIfGreater(key, getHumanBeing());
+
+                    if (collectionManager.getCollection().containsKey(key)) {
+
+                        if (stream.equals("console")) {
+                            collectionManager.replaceIfGreater(key, getHumanBeingFromConsole());
+                        } else {
+                            collectionManager.replaceIfGreater(key, getHumanBeingFromFile(scanner));
+                        }
+
+                    } else {
+                        throw new NoSuchKeyException("Can't find the entered key in the collection :(\n" +
+                                "Please try to enter command again");
+                    }
+
                 } catch(Exception e) {
+                    System.out.println(e.getMessage());
                     throw new InvalidArgumentsException();
                 }
             }
@@ -156,6 +224,7 @@ public class CommandsExecutor {
                     Long key = Long.parseLong(args[0]);
                     collectionManager.removeGreaterKey(key);
                 } catch (Exception e) {
+                    System.out.println(e.getMessage());
                     throw new InvalidArgumentsException();
                 }
             }
@@ -169,6 +238,7 @@ public class CommandsExecutor {
                     Double impactSpeed = Double.parseDouble(args[0].replaceAll(",", "."));
                     collectionPrinter.countLessThanImpactSpeed(collectionManager, impactSpeed);
                 } catch (Exception e) {
+                    System.out.println(e.getMessage());
                     throw new InvalidArgumentsException();
                 }
             }
@@ -179,9 +249,18 @@ public class CommandsExecutor {
                             "Please check that you do not enter any arguments in the same line with the command");
                 }
                 try {
-                    CarObjectReader carObjectReader = new CarObjectReader();
-                    collectionPrinter.filterLessThanCar(collectionManager, carObjectReader.readObjectFromConsole());
+                    CarObjectConsoleReader carObjectReader = new CarObjectConsoleReader();
+
+                    if (stream.equals("console")) {
+                        collectionPrinter.filterLessThanCar(collectionManager, carObjectReader.readObjectFromConsole());
+                    } else {
+                        CarObjectFileReader carObjectFileReader = new CarObjectFileReader(scanner);
+                        Car car = carObjectFileReader.readData();
+                        collectionPrinter.filterLessThanCar(collectionManager, car);
+                    }
+
                 } catch (Exception e) {
+                    System.out.println(e.getMessage());
                     throw new InvalidArgumentsException();
                 }
             }
