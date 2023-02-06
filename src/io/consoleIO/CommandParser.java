@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 public class CommandParser extends ConsoleReader<Pair<String, String[]>> {
 
-    private static final ArrayList<String> commandsList = new ArrayList<String>() {{
+    private static final ArrayList<String> commandsList = new ArrayList<>() {{
         add("help");
         add("info");
         add("show");
@@ -45,8 +45,11 @@ public class CommandParser extends ConsoleReader<Pair<String, String[]>> {
     private Pair<String, String[]> getStringPair(Scanner scanner) throws NoSuchCommandException {
         List<String> line = Arrays.stream(scanner.nextLine().strip().replaceAll(" +", " ").split(" ")).toList();
 
+        // System.out.println(line);
+
         if (!commandsList.contains(line.get(0))) {
-            throw new NoSuchCommandException("Can't find command in commands list\nPlease try to enter command again\n");
+            throw new NoSuchCommandException(String.format("Can't find command %s in commands list\n", line.get(0)) +
+                    "Please try to enter command again\n");
         }
 
         String command = line.get(0);

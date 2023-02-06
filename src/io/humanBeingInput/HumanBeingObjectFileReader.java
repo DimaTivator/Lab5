@@ -62,6 +62,7 @@ public class HumanBeingObjectFileReader extends FileReader<HumanBeing> {
             }
         }
 
+
         Coordinates coordinates;
         CoordinatesObjectFileReader coordinatesObjectFileReader = new CoordinatesObjectFileReader(fileScanner);
         while (true) {
@@ -73,6 +74,7 @@ public class HumanBeingObjectFileReader extends FileReader<HumanBeing> {
             }
         }
 
+
         WeaponType weaponType;
         WeaponTypeFileReader weaponTypeFileReader = new WeaponTypeFileReader(fileScanner);
         while (true) {
@@ -83,6 +85,7 @@ public class HumanBeingObjectFileReader extends FileReader<HumanBeing> {
                 System.out.print(e.getMessage());
             }
         }
+
 
         Mood mood;
         MoodFileReader moodFileReader = new MoodFileReader(fileScanner);

@@ -3,11 +3,9 @@ package io.fileIO.in;
 import collectionManagement.CollectionManager;
 import collectionManagement.CollectionPrinter;
 import collectionManagement.CommandsExecutor;
-import exceptions.commandExceptions.NoSuchCommandException;
 import io.consoleIO.CommandParser;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class ScriptExecutor {
@@ -27,6 +25,8 @@ public class ScriptExecutor {
         CommandsExecutor commandsExecutor = new CommandsExecutor(collectionManager, collectionPrinter);
         CommandParser commandParser = new CommandParser();
 
-        commandsExecutor.execute(commandParser.parseCommandFromFile(fileScanner), "file", fileScanner);
+        while (fileScanner.hasNext()) {
+            commandsExecutor.execute(commandParser.parseCommandFromFile(fileScanner), "file", fileScanner);
+        }
     }
 }

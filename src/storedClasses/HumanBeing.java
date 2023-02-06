@@ -124,6 +124,12 @@ public class HumanBeing implements Comparable<HumanBeing> {
                 fieldToString("id", id) +
                 fieldToString("name", name) +
                 fieldToString("coordinates", coordinates) +
-                fieldToString("creation date", creationDate);
+                fieldToString("creation date", creationDate) +
+                fieldToString("mood", mood) +
+                fieldToString("weapon type", weaponType) +
+                fieldToString("realHero", realHero) +
+                fieldToString("hasToothpick", hasToothpick) +
+                fieldToString("impact speed", impactSpeed) +
+                fieldToString("car", car);
     }
 }
