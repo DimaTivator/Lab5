@@ -6,12 +6,24 @@ import storedClasses.HumanBeing;
 
 import java.util.Map;
 
+/**
+ * Class representing the ShowCommand, which extends the Command class.
+ */
 public class ShowCommand extends Command {
 
+    /**
+     * Constructor that takes in a CollectionManager object.
+     * @param collectionManager the CollectionManager object.
+     */
     public ShowCommand(CollectionManager collectionManager) {
         super(collectionManager);
     }
 
+    /**
+     * Overrides the execute method to show the data of the collection.
+     * Throws an EmptyCollectionException if the collection is empty.
+     * @throws EmptyCollectionException if the collection is empty.
+     */
     @Override
     public void execute() throws EmptyCollectionException {
         Map<Long, HumanBeing> data = getCollectionManager().getCollection();

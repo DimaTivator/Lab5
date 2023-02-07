@@ -9,8 +9,14 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * The {@code CommandParser} class is a console reader that is used to parse commands and arguments from the console or
+ * a file.
+ */
 public class CommandParser extends ConsoleReader<Pair<String, String[]>> {
-
+    /**
+     * The {@code commandsList} ArrayList stores a list of supported commands.
+     */
     private static final ArrayList<String> commandsList = new ArrayList<>() {{
         add("help");
         add("info");
@@ -31,16 +37,28 @@ public class CommandParser extends ConsoleReader<Pair<String, String[]>> {
         add("print_unique_mood");
     }};
 
+    /**
+     * Returns the {@code commandsList}.
+     *
+     * @return an ArrayList of supported commands
+     */
     public static ArrayList<String> getCommandsList() {
         return commandsList;
     }
 
+    /**
+     * Reads a command and its arguments from the console and returns them as a Pair of command and arguments.
+     *
+     * @return a Pair of command and arguments
+     * @throws NoSuchCommandException if the entered command is not found in the list of supported commands
+     */
     @Override
     public Pair<String, String[]> readObjectFromConsole() throws NoSuchCommandException {
         Scanner scanner = getConsoleScanner();
         System.out.print(ConsoleColors.BLUE_BRIGHT + "Enter a command: " + ConsoleColors.RESET);
         return getStringPair(scanner);
     }
+
 
     private Pair<String, String[]> getStringPair(Scanner scanner) throws NoSuchCommandException {
         List<String> line = Arrays.stream(scanner.nextLine().strip().replaceAll(" +", " ").split(" ")).toList();
@@ -58,6 +76,12 @@ public class CommandParser extends ConsoleReader<Pair<String, String[]>> {
         return new Pair<>(command, args);
     }
 
+    /**
+     * Reads a command and its arguments from the file and returns them as a Pair of command and arguments.
+     *
+     * @return a Pair of command and arguments
+     * @throws NoSuchCommandException if the entered command is not found in the list of supported commands
+     */
     public Pair<String, String[]> parseCommandFromFile(Scanner fileScanner) throws NoSuchCommandException {
 
         return getStringPair(fileScanner);

@@ -8,15 +8,34 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * The RemoveLowerCommand class extends the Command class.
+ * This class is used to remove all key-value pairs in the collection where the value is less than the specified human being.
+ */
 public class RemoveLowerCommand extends Command {
 
+    /**
+     * The human being to compare with the values in the collection.
+     */
     private final HumanBeing humanBeing;
 
+    /**
+     * Constructs a RemoveLowerCommand object with a CollectionManager object and a human being.
+     *
+     * @param collectionManager The CollectionManager object that the command operates on.
+     * @param humanBeing The human being to compare with the values in the collection.
+     */
     public RemoveLowerCommand(CollectionManager collectionManager, HumanBeing humanBeing) {
         super(collectionManager);
         this.humanBeing = humanBeing;
     }
 
+    /**
+     * Removes all key-value pairs in the collection where the value is less than the specified human being.
+     * Throws an EmptyCollectionException if the collection is empty.
+     *
+     * @throws EmptyCollectionException If the collection is empty.
+     */
     @Override
     public void execute() throws EmptyCollectionException {
         Map<Long, HumanBeing> data = getCollectionManager().getCollection();
@@ -25,6 +44,9 @@ public class RemoveLowerCommand extends Command {
             throw new EmptyCollectionException();
         }
 
+        /*
+         * A set to store the keys of the key-value pairs where the value is less than the specified human being.
+         */
         Set<Long> keySet = new HashSet<>();
 
         data.forEach((key, value) -> {
@@ -36,3 +58,4 @@ public class RemoveLowerCommand extends Command {
         keySet.forEach(data::remove);
     }
 }
+

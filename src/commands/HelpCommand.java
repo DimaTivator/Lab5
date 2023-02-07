@@ -6,12 +6,23 @@ import collectionManagement.CollectionPrinter;
 
 import java.util.Map;
 
+/**
+ * The HelpCommand class implements the behavior for the "help" command.
+ * This command is used to display the available commands in the system and their descriptions.
+ */
 public class HelpCommand extends Command {
 
+    /**
+     Constructs a HelpCommand object.
+     @param collectionPrinter the object that helps with printing the collection data
+     */
     public HelpCommand(CollectionPrinter collectionPrinter) {
         super(collectionPrinter);
     }
 
+    /**
+     This method displays the available commands in the system and their descriptions.
+     */
     @Override
     public void execute() {
         CollectionManager collectionManager = getCollectionManager();

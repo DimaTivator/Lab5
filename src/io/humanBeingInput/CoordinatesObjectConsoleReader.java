@@ -8,12 +8,19 @@ import storedClasses.Coordinates;
 import java.util.Scanner;
 
 /**
- * Class for reading and parsing coordinates field of HumanBeing object
+ * The {@code CoordinatesObjectConsoleReader} class extends {@code ConsoleReader} and is used to read a
+ * {@code Coordinates} object from the console.
  */
 public class CoordinatesObjectConsoleReader extends ConsoleReader<Coordinates> {
 
     private final Coordinates coordinates = new Coordinates();
 
+    /**
+     * Reads the {@code Coordinates} object from the console.
+     * @return the {@code Coordinates} object read from the console.
+     * @throws InvalidInputException if the input is invalid.
+     * @throws InvalidCoordinatesException if the entered coordinates are invalid.
+     */
     @Override
     public Coordinates readObjectFromConsole() throws InvalidInputException, InvalidCoordinatesException {
         Scanner scanner = getConsoleScanner();
@@ -22,6 +29,14 @@ public class CoordinatesObjectConsoleReader extends ConsoleReader<Coordinates> {
         return getCoordinates(scanner, coordinates);
     }
 
+    /**
+     * Gets the {@code Coordinates} object from the {@code Scanner}.
+     * @param scanner the {@code Scanner} to read the {@code Coordinates} object from.
+     * @param coordinates the {@code Coordinates} object to be read.
+     * @return the {@code Coordinates} object read from the {@code Scanner}.
+     * @throws InvalidInputException if the input is invalid.
+     * @throws InvalidCoordinatesException if the entered coordinates are invalid.
+     */
     static Coordinates getCoordinates(Scanner scanner, Coordinates coordinates) throws InvalidInputException, InvalidCoordinatesException {
         String[] s = scanner.nextLine().strip().replaceAll(" +", " ").replaceAll(",", ".").split(" ");
 

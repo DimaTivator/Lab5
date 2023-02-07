@@ -6,19 +6,34 @@ import exceptions.EmptyCollectionException;
 import storedClasses.Car;
 import storedClasses.HumanBeing;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
+/**
+ * The FilterLessThanCarCommand class implements a command to filter the elements of the collection
+ * whose car field value is less than the specified one.
+ */
 public class FilterLessThanCarCommand extends Command {
 
+    /**
+     The car to be compared with.
+     */
     private final Car car;
 
+    /**
+     * Creates a new instance of the FilterLessThanCarCommand class.
+     * @param collectionManager the CollectionManager instance to manage the collection.
+     * @param car the car to be compared with.
+     */
     public FilterLessThanCarCommand(CollectionManager collectionManager, Car car) {
         super(collectionManager);
         this.car = car;
     }
 
+    /**
+     * Executes the command to filter the elements of the collection
+     * whose car field value is less than the specified one.
+     * @throws EmptyCollectionException if the collection is empty.
+     */
     @Override
     public void execute() throws EmptyCollectionException {
         Map<Long, HumanBeing> data = getCollectionManager().getCollection();

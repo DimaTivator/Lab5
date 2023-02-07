@@ -6,35 +6,64 @@ import storedClasses.HumanBeing;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+/**
+ * CollectionManager is a class that stores a collection of {@link storedClasses.HumanBeing} objects.
+ * The class is responsible for managing the collection, adding, updating, removing and replacing elements.
+ * It also provides methods for removing elements by key, removing elements with a greater key, and clearing the collection.
+ * The class is designed to use the command pattern to execute actions on the collection.
+ */
+
 public class CollectionManager {
 
+    /**
+     * The creation date of the collection.
+     */
     private final java.time.LocalDate creationDate;
 
+    /**
+     * The collection of {@link storedClasses.HumanBeing} objects.
+     */
     private Map<Long, HumanBeing> data = new LinkedHashMap<>();
 
+    /**
+     * Constructs a new CollectionManager and sets the creation date to the current date.
+     */
     public CollectionManager() {
         creationDate = java.time.LocalDate.now();
     }
 
+    /**
+     * Gets the creation date of the collection.
+     *
+     * @return the creation date of the collection.
+     */
     public java.time.LocalDate getCreationDate() {
         return creationDate;
     }
 
     /**
-     * Method returns the collection
+     * Gets the collection of {@link storedClasses.HumanBeing} objects.
+     *
+     * @return the collection of {@link storedClasses.HumanBeing} objects.
      */
     public Map<Long, HumanBeing> getCollection() {
         return data;
     }
 
+    /**
+     * Sets the collection of {@link storedClasses.HumanBeing} objects.
+     *
+     * @param collection the collection to set.
+     */
     public void setCollection(LinkedHashMap<Long, HumanBeing> collection) {
         data = collection;
     }
 
     /**
-     * Method inserts to the collection a new pair (key - value)
-     * @param key key
-     * @param value value
+     * Inserts a {@link storedClasses.HumanBeing} object into the collection with the specified key.
+     *
+     * @param key the key to use for the insertion.
+     * @param value the {@link storedClasses.HumanBeing} object to insert.
      */
     public void insertElement(Long key, HumanBeing value) {
         try {
@@ -44,7 +73,10 @@ public class CollectionManager {
     }
 
     /**
-     * Method updates the value in the collection by the specified key
+     * Updates the value in the collection for the specified key.
+     *
+     * @param key the key to use for the update.
+     * @param newValue the new {@link storedClasses.HumanBeing} object to update.
      */
     public void updateValueByKey(Long key, HumanBeing newValue) {
         try {
@@ -54,18 +86,21 @@ public class CollectionManager {
     }
 
     /**
-     * Method removes from the collection the pair by the specified key
-     * @param key key
+     * Removes the value from the collection for the specified key.
+     *
+     * @param key the key to use for the removal.
      */
     public void removeByKey(Long key) {
         try {
-            Command removeKeyCommand = new RemoveKeyCommmand(this, key);
+            Command removeKeyCommand = new RemoveKeyCommand(this, key);
             removeKeyCommand.execute();
         } catch (Exception ignored) {}
     }
 
     /**
-     * Method clears the collection
+     * Clears the collection.
+     * Creates a ClearCollectionCommand object and executes it.
+     * Any exception thrown is caught and ignored.
      */
     public void clearCollection() {
         try {
@@ -75,8 +110,11 @@ public class CollectionManager {
     }
 
     /**
-     * Method removes from the collection all items which value is less than the specified one
-     * @param value value
+     * Removes all elements in the collection that have a key less than the specified value.
+     * Creates a RemoveLowerCommand object and executes it.
+     * Any exception thrown is printed to the console.
+     *
+     * @param value the specified value to compare keys against
      */
     public void removeLower(HumanBeing value) {
         try {
@@ -88,9 +126,12 @@ public class CollectionManager {
     }
 
     /**
-     * Method replaces the value by the key if the new value is greater than the old one
-     * @param key key
-     * @param value value
+     * Replaces the value of the element with the specified key if it is greater than the current value.
+     * Creates a ReplaceIfGreaterCommand object and executes it.
+     * Any exception thrown is caught and ignored.
+     *
+     * @param key the key of the element to replace
+     * @param value the new value to replace the current value with
      */
     public void replaceIfGreater(Long key, HumanBeing value) {
         try {
@@ -100,8 +141,11 @@ public class CollectionManager {
     }
 
     /**
-     * Method removes from the collection all items which key is greater than the specified one
-     * @param key key
+     * Removes all elements in the collection that have a key greater than the specified value.
+     * Creates a RemoveGreaterKeyCommand object and executes it.
+     * Any exception thrown is printed to the console.
+     *
+     * @param key the specified key to compare keys against
      */
     public void removeGreaterKey(Long key) {
         try {

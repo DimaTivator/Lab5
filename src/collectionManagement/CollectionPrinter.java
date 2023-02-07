@@ -7,12 +7,21 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
- * Class CollectionPrinter is used to print info about the collection
+ The CollectionPrinter class is responsible for printing information about the collection and its elements.
+ It contains a map of available commands and their descriptions, and methods for printing collection information,
+ unique mood values, elements with impact speed less than a specified value, elements with car less than a specified value,
+ saving collection to file, and printing help information.
  */
 public class CollectionPrinter {
 
+    /**
+     * A map of available commands and their descriptions.
+     */
     private Map<String, String> commands = new LinkedHashMap<>();
 
+    /**
+     * Fills the commands map with available commands and their descriptions.
+     */
     private void setCommands() {
         commands.put("help", "print available commands");
         commands.put("info", "print information about the collection (type, initialization date, number of items, etc.)");
@@ -33,18 +42,24 @@ public class CollectionPrinter {
         commands.put("print_unique_mood", "print the unique values of the mood field of all items in the collection");
     }
 
+    /**
+     * Returns the map of available commands and their descriptions.
+     *
+     * @return the map of available commands and their descriptions
+     */
     public Map<String, String> getCommands() {
         return commands;
     }
 
+    /**
+     * Constructor that calls setCommands method.
+     */
     public CollectionPrinter() {
         setCommands();
     }
 
     /**
-     * Method printCollectionInfo prints the collection type, the date of initialization of collection and the number
-     * elements in collection
-     * @param collectionManager collectionManager
+     * Prints information about the collection: type of collection, date of initialization and th number of objects in it
      */
     public void printCollectionInfo(CollectionManager collectionManager) {
         try {
@@ -54,9 +69,8 @@ public class CollectionPrinter {
     }
 
     /**
-     * Method printCollection prints HashMap contents in (key - value) format,
-     * where every pair (key - value) is printed on a separate line
-     * @param collectionManager collectionManager
+     * Method prints the collection managed by the {@code collectionManager} object.
+     * @param collectionManager the collection manager that manages the collection to print the unique moods of the elements
      */
     public void printCollection(CollectionManager collectionManager) {
         try {
@@ -68,8 +82,9 @@ public class CollectionPrinter {
     }
 
     /**
-     * Method printUniqueMood prints the unique values of the mood field of all items in the collection
-     * @param collectionManager the collection
+     * The {@code printUniqueMood} method prints the unique moods of the elements in the collection managed by the
+     * {@code collectionManager} object.
+     * @param collectionManager the collection manager that manages the collection to print the unique moods of the elements
      */
     public void printUniqueMood(CollectionManager collectionManager) {
         try {
@@ -81,9 +96,10 @@ public class CollectionPrinter {
     }
 
     /**
-     * Method counts and prints the number of elements whose impactSpeed field value is less than the specified one
-     * @param collectionManager the collection
-     * @param impactSpeed impactSpeed
+     * The {@code countLessThanImpactSpeed} method counts the number of elements in the collection managed by the
+     * {@code collectionManager} object that have impact speed less than the specified {@code impactSpeed}.
+     * @param collectionManager the collection manager that manages the collection to count the number of elements with impact speed less than the specified value
+     * @param impactSpeed the maximum impact speed to consider when counting elements
      */
     public void countLessThanImpactSpeed(CollectionManager collectionManager, Double impactSpeed) {
         try {
@@ -95,9 +111,10 @@ public class CollectionPrinter {
     }
 
     /**
-     * Method counts and prints the number of elements whose car field value is less than the specified one
-     * @param collectionManager the collection
-     * @param car car
+     * The {@code filterLessThanCar} method filters the elements in the collection managed by the
+     * {@code collectionManager} object that have specifications less than those of the specified {@code car}.
+     * @param collectionManager the collection manager that manages the collection to filter the elements with specifications less than those of the specified car
+     * @param car the car whose specifications will be used as a comparison to filter the elements in the collection
      */
     public void filterLessThanCar(CollectionManager collectionManager, Car car) {
         try {
@@ -108,6 +125,10 @@ public class CollectionPrinter {
         }
     }
 
+    /**
+     Saves the current collection to a file using the default file path.
+     @param collectionManager the {@link CollectionManager} instance to use for saving the collection
+     */
     public void saveCollectionToFile(CollectionManager collectionManager) {
         try {
             Command saveCollectionToFileCommand = new SaveCollectionToFileCommand(collectionManager);
@@ -115,6 +136,11 @@ public class CollectionPrinter {
         } catch (Exception ignored) {}
     }
 
+    /**
+     Saves the current collection to a file using the specified file path.
+     @param collectionManager the {@link CollectionManager} instance to use for saving the collection
+     @param filePath the file path to save the collection to
+     */
     public void saveCollectionToFile(CollectionManager collectionManager, String filePath) {
         try {
             Command saveCollectionToFileCommand = new SaveCollectionToFileCommand(collectionManager, filePath);
@@ -123,7 +149,7 @@ public class CollectionPrinter {
     }
 
     /**
-     * Method prints the list of available commands
+     Prints the help message for the program.
      */
     public void printHelp() {
         try {

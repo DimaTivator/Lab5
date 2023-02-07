@@ -6,10 +6,19 @@ import storedClasses.Car;
 
 import java.util.Scanner;
 
+/**
+ * The CarObjectConsoleReader class extends the ConsoleReader class and implements the readObjectFromConsole method.
+ * This class is used for reading {@link Car} objects from the console.
+ */
 public class CarObjectConsoleReader extends ConsoleReader<Car> {
 
     private final Car car = new Car();
 
+    /**
+     * Reads a Car object from the console by asking for its properties and creating a new Car object using the input.
+     * @return a Car object created from the console input
+     * @throws InvalidInputException if the input is invalid
+     */
     @Override
     public Car readObjectFromConsole() throws InvalidInputException {
         Scanner scanner = getConsoleScanner();

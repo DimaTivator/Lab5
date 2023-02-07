@@ -7,15 +7,30 @@ import storedClasses.HumanBeing;
 
 import java.util.Map;
 
+/**
+ * CountLessThanImpactSpeedCommand class is a concrete implementation of the Command abstract class.
+ * It counts the number of elements in the collection whose `impactSpeed` is less than the specified `impactSpeed`.
+ */
 public class CountLessThanImpactSpeedCommand extends Command {
 
     private final Double impactSpeed;
 
+    /**
+     * Constructs a CountLessThanImpactSpeedCommand with the specified CollectionManager and impact speed.
+     *
+     * @param collectionManager the CollectionManager to be used
+     * @param impactSpeed the impact speed to be used as a comparison value
+     */
     public CountLessThanImpactSpeedCommand(CollectionManager collectionManager, Double impactSpeed) {
         super(collectionManager);
         this.impactSpeed = impactSpeed;
     }
 
+    /**
+     * Executes the command, counting the number of elements in the collection whose `impactSpeed` is less than the specified `impactSpeed`.
+     *
+     * @throws EmptyCollectionException if the collection is empty
+     */
     @Override
     public void execute() throws EmptyCollectionException {
         CollectionManager collectionManager = getCollectionManager();

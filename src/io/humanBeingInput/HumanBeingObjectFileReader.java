@@ -7,15 +7,29 @@ import storedClasses.*;
 
 import java.util.Scanner;
 
+/**
+ * The `HumanBeingObjectFileReader` class extends `FileReader` and is responsible for reading data from a file
+ * and creating a `HumanBeing` object from the data.
+ */
 public class HumanBeingObjectFileReader extends FileReader<HumanBeing> {
 
     private final Scanner fileScanner = getFileScanner();
 
+    /**
+     * Constructs a `HumanBeingObjectFileReader` with a `Scanner` object.
+     *
+     * @param fileScanner a `Scanner` object that will be used to read data from a file
+     */
     public HumanBeingObjectFileReader(Scanner fileScanner) {
         super(fileScanner);
     }
 
-
+    /**
+     * Reads the name of a human being from a file.
+     *
+     * @return the name of a human being
+     * @throws InvalidInputException if the name field is empty
+     */
     private String readNameFromFile() throws InvalidInputException {
 
         String name = fileScanner.nextLine().strip();
@@ -27,6 +41,13 @@ public class HumanBeingObjectFileReader extends FileReader<HumanBeing> {
         return name;
     }
 
+    /**
+     * Reads a boolean value from a file.
+     *
+     * @param valueName the name of the value to be read
+     * @return the boolean value read from the file
+     * @throws InvalidInputException if the value read from the file is not "true" or "false"
+     */
     private boolean readBooleanFromFile(String valueName) throws InvalidInputException {
 
         String input = fileScanner.nextLine().strip().toLowerCase();
@@ -40,6 +61,13 @@ public class HumanBeingObjectFileReader extends FileReader<HumanBeing> {
         return Boolean.parseBoolean(input);
     }
 
+    /**
+     * Reads a double value from a file.
+     *
+     * @param valueName the name of the value to be read
+     * @return the double value read from the file
+     * @throws InvalidInputException if the value read from the file is not a valid double
+     */
     private double readDoubleFromFile(String valueName) throws InvalidInputException {
 
         if (fileScanner.hasNextDouble()) {
@@ -50,6 +78,11 @@ public class HumanBeingObjectFileReader extends FileReader<HumanBeing> {
         );
     }
 
+    /**
+     * Reads data from a file and creates a `HumanBeing` object from the data.
+     *
+     * @return a `HumanBeing` object created from data read from a file
+     */
     public HumanBeing readHumanBeingFromFile() {
 
         String name;

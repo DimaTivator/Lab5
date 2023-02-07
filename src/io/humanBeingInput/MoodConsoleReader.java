@@ -9,8 +9,17 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * The {@code MoodConsoleReader} class provides a method to read a {@link Mood} object from the console.
+ */
 public class MoodConsoleReader extends ConsoleReader<Mood> {
 
+    /**
+     * Reads a {@link Mood} object from the console by printing the available moods and asking the user to choose one.
+     * If the user enters an invalid mood, an {@link InvalidInputException} is thrown.
+     * @return the {@link Mood} object read from the console
+     * @throws InvalidInputException if the user enters an invalid mood
+     */
     @Override
     public Mood readObjectFromConsole() throws InvalidInputException {
         Scanner scanner = getConsoleScanner();

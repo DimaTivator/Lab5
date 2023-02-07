@@ -17,12 +17,22 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import storedClasses.*;
 
+/**
+ * The class HumanBeingXMLParser extends the Parser class and reads data from a specified XML file
+ * and parses it into a `LinkedHashMap` of HumanBeing objects.
+ */
 public class HumanBeingXMLParser extends Parser<LinkedHashMap<Long, HumanBeing>> {
 
+    /**
+     * Reads data from a specified XML file and returns a Document object.
+     *
+     * @param fileName the name of the XML file
+     * @return a Document object containing the data from the XML file
+     */
     public Document readData(String fileName) {
 
         try {
-
+            // Read XML file and create a Document object
             File inputFile = new File(fileName);
 
             DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
@@ -42,11 +52,19 @@ public class HumanBeingXMLParser extends Parser<LinkedHashMap<Long, HumanBeing>>
         return null;
     }
 
-    public LinkedHashMap<Long, HumanBeing> parseDataToHashMap(String fileName) {
+    /**
+     * Parses the data from the specified XML file into a `LinkedHashMap` of HumanBeing objects.
+     *
+     * @param fileName the name of the XML file
+     * @return a `LinkedHashMap` of HumanBeing objects containing the data from the XML file
+     */
+    public LinkedHashMap<Long, HumanBeing> parseData(String fileName) {
 
+        // A LinkedHashMap to store the HumanBeing objects
         LinkedHashMap<Long, HumanBeing> humanBeings = new LinkedHashMap<>();
 
         try {
+            // Read the data from the XML file and parse it into a LinkedHashMap
 
             Document document = readData(fileName);
             NodeList humanBeingList = document.getElementsByTagName("HumanBeings");
@@ -107,7 +125,13 @@ public class HumanBeingXMLParser extends Parser<LinkedHashMap<Long, HumanBeing>>
         return humanBeings;
     }
 
-
+    /**
+     * Parses the name from an XML element and returns it as a String.
+     *
+     * @param element the XML element containing the name
+     * @return the name as a String
+     * @throws ParseException if the name field is empty
+     */
     private String parseName(Element element) throws ParseException {
         if (element.getElementsByTagName("name").item(0).getTextContent().isEmpty()) {
             throw new ParseException("Name field can't be empty!");
@@ -115,7 +139,14 @@ public class HumanBeingXMLParser extends Parser<LinkedHashMap<Long, HumanBeing>>
         return element.getElementsByTagName("name").item(0).getTextContent();
     }
 
-
+    /**
+     * Parses the coordinates from an XML element and returns them as a Coordinates object.
+     *
+     * @param element the XML element containing the coordinates
+     * @return the coordinates as a Coordinates object
+     * @throws ParseException if there are troubles with parsing the coordinates
+     * @throws InvalidCoordinatesException if the coordinates are invalid
+     */
     private Coordinates parseCoordinates(Element element) throws ParseException, InvalidCoordinatesException {
         if (element.getElementsByTagName("x").getLength() != 1 || element.getElementsByTagName("y").getLength() != 1) {
             throw new ParseException("Some troubles with parsing coordinates :(");
@@ -128,7 +159,13 @@ public class HumanBeingXMLParser extends Parser<LinkedHashMap<Long, HumanBeing>>
         return coordinates;
     }
 
-
+    /**
+     * Parses the mood from an XML element and returns it as a Mood object.
+     *
+     * @param element the XML element containing the mood
+     * @return the mood as a Mood object
+     * @throws ParseException if there are troubles with parsing the mood
+     */
     private Mood parseMood(Element element) throws ParseException {
         if (element.getElementsByTagName("mood").getLength() != 1) {
             throw new ParseException("Some troubles with parsing mood :(");
@@ -146,7 +183,13 @@ public class HumanBeingXMLParser extends Parser<LinkedHashMap<Long, HumanBeing>>
         return Mood.valueOf(element.getElementsByTagName("mood").item(0).getTextContent().toUpperCase());
     }
 
-
+    /**
+     Parses the weapon type from the given XML element.
+     *
+     * @param element the XML element to parse
+     * @return the weapon type
+     * @throws ParseException if there are any troubles with parsing weapon type
+     */
     private WeaponType parseWeaponType(Element element) throws ParseException {
         if (element.getElementsByTagName("weaponType").getLength() != 1) {
             throw new ParseException("Some troubles with parsing weapon type :(");
@@ -164,7 +207,13 @@ public class HumanBeingXMLParser extends Parser<LinkedHashMap<Long, HumanBeing>>
         return WeaponType.valueOf(element.getElementsByTagName("weaponType").item(0).getTextContent().toUpperCase());
     }
 
-
+    /**
+     * Parses the car from the given XML element.
+     *
+     * @param element the XML element to parse
+     * @return the car
+     * @throws ParseException if there are any troubles with parsing car
+     */
     private Car parseCar(Element element) throws ParseException {
         if (element.getElementsByTagName("name").getLength() > 1 || element.getElementsByTagName("cool").getLength() > 1) {
             throw new ParseException("Some troubles with parsing car :(");

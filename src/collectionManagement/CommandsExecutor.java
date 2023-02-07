@@ -16,26 +16,62 @@ import storedClasses.HumanBeing;
 
 import java.util.Scanner;
 
+/**
+ * The `CommandsExecutor` class is responsible for executing commands.
+ * It uses two objects of the `CollectionPrinter` and `CollectionManager` classes.
+ */
 public class CommandsExecutor {
 
+    /**
+     * The `collectionPrinter` object is used for printing various information about the collection.
+     */
     private final CollectionPrinter collectionPrinter;
+
+    /**
+     * The `collectionManager` object is used for managing the collection.
+     */
     private final CollectionManager collectionManager;
 
+    /**
+     * Constructs a `CommandsExecutor` object with the given `collectionManager` and `collectionPrinter`.
+     *
+     * @param collectionManager the `CollectionManager` object used for managing the collection
+     * @param collectionPrinter the `CollectionPrinter` object used for printing information about the collection
+     */
     public CommandsExecutor(CollectionManager collectionManager, CollectionPrinter collectionPrinter) {
         this.collectionManager = collectionManager;
         this.collectionPrinter = collectionPrinter;
     }
 
+    /**
+     * Returns a `HumanBeing` object read from the console.
+     *
+     * @return the `HumanBeing` object read from the console
+     */
     private HumanBeing getHumanBeingFromConsole() {
         HumanBeingObjectConsoleReader humanBeingObjectReader = new HumanBeingObjectConsoleReader();
         return humanBeingObjectReader.readHumanBeingFromConsole();
     }
 
+    /**
+     * This method reads a `HumanBeing` object from a file and returns it.
+     *
+     * @param fileScanner the `Scanner` instance that reads the file
+     * @return the `HumanBeing` object read from the file
+     */
     private HumanBeing getHumanBeingFromFile(Scanner fileScanner) {
         HumanBeingObjectFileReader humanBeingObjectFileReader = new HumanBeingObjectFileReader(fileScanner);
         return humanBeingObjectFileReader.readHumanBeingFromFile();
     }
 
+    /**
+     Executes the given command.
+
+     @param commandPair a Pair of command name and its arguments
+     @param stream source of the input data ("console" or "file")
+     @param scanner the Scanner object to read input from
+     @throws Exception if an error occurs during the execution of the command
+     */
     public void execute(Pair<String, String[]> commandPair, String stream, Scanner scanner) throws Exception {
         String command = commandPair.getFirst();
         String[] args = commandPair.getSecond();
