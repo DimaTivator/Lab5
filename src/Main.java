@@ -1,3 +1,4 @@
+import auxiliaryClasses.ConsoleColors;
 import collectionManagement.CollectionManager;
 import collectionManagement.CollectionPrinter;
 import collectionManagement.CommandsExecutor;
@@ -20,6 +21,12 @@ public class Main {
      * @param args - Arguments passed to the main method.
      */
     public static void main(String[] args) {
+        if (args.length != 1) {
+            System.out.println(ConsoleColors.RED + "You should enter a file path to the xml file with collection!" +
+                    ConsoleColors.RESET);
+            System.exit(0);
+        }
+
         CollectionManager collectionManager = new CollectionManager();
         CollectionPrinter collectionPrinter = new CollectionPrinter();
 
