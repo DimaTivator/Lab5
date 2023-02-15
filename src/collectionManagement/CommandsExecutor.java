@@ -3,10 +3,13 @@ package collectionManagement;
 import commands.Command;
 import commands.ExecuteScriptCommand;
 import commands.ExitCommand;
+import commands.SaveCollectionToFileCommand;
 import dataStructures.Pair;
 import exceptions.NoSuchKeyException;
 import exceptions.OccupiedKeyException;
+import exceptions.ScriptsRecursionException;
 import exceptions.commandExceptions.InvalidArgumentsException;
+import io.fileIO.out.HumanBeingXMLWriter;
 import io.humanBeingInput.CarObjectConsoleReader;
 import io.humanBeingInput.CarObjectFileReader;
 import io.humanBeingInput.HumanBeingObjectConsoleReader;
@@ -14,7 +17,11 @@ import io.humanBeingInput.HumanBeingObjectFileReader;
 import storedClasses.Car;
 import storedClasses.HumanBeing;
 
+import java.sql.SQLOutput;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Scanner;
+import java.util.Set;
 
 /**
  * The `CommandsExecutor` class is responsible for executing commands.
@@ -31,6 +38,8 @@ public class CommandsExecutor {
      * The `collectionManager` object is used for managing the collection.
      */
     private final CollectionManager collectionManager;
+
+    private Set<String> used_scripts = new HashSet<>();
 
     /**
      * Constructs a `CommandsExecutor` object with the given `collectionManager` and `collectionPrinter`.
@@ -75,6 +84,8 @@ public class CommandsExecutor {
     public void execute(Pair<String, String[]> commandPair, String stream, Scanner scanner) throws Exception {
         String command = commandPair.getFirst();
         String[] args = commandPair.getSecond();
+
+        // System.out.println(command + ' ' + Arrays.toString(args));
 
         switch (command) {
 
@@ -196,8 +207,15 @@ public class CommandsExecutor {
                 if (args.length != 1) {
                     throw new InvalidArgumentsException();
                 }
-                Command executeScriptCommand = new ExecuteScriptCommand(collectionManager, collectionPrinter, args[0]);
+                if (used_scripts.contains(args[0])) {
+                    // System.out.println("SOS SOS SOS");
+                    throw new ScriptsRecursionException("You should not call command `execute_script` recursively!");
+                }
+                used_scripts.add(args[0]);
+                Command executeScriptCommand = new ExecuteScriptCommand(collectionManager, collectionPrinter, this, args[0]);
                 executeScriptCommand.execute();
+                // used_scripts.forEach(System.out::println);
+                used_scripts.clear();
             }
 
             case ("exit") -> {
@@ -309,5 +327,9 @@ public class CommandsExecutor {
                 collectionPrinter.printUniqueMood(collectionManager);
             }
         }
+
+        // save collection
+        CollectionSaver collectionSaver = new CollectionSaver(collectionManager, new HumanBeingXMLWriter());
+        collectionSaver.saveCollection();
     }
 }

@@ -3,6 +3,8 @@ package commands;
 import auxiliaryClasses.ConsoleColors;
 import io.consoleIO.ConfirmationReader;
 
+import java.io.File;
+
 /**
  This class represents the "exit" command in the program
  */
@@ -24,6 +26,10 @@ public class ExitCommand extends Command {
         String confirmation = confirmationReader.readObjectFromConsole();
         if (confirmation.equals("Y")) {
             System.out.println(ConsoleColors.PURPLE + "Bye!" + ConsoleColors.RESET);
+
+            File saveInTmp = new File("/tmp/s367054Lab5Saves/.save.xml");
+            boolean ignored = saveInTmp.delete();
+
             System.exit(0);
         }
     }

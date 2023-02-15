@@ -1,12 +1,16 @@
 import auxiliaryClasses.ConsoleColors;
 import collectionManagement.CollectionManager;
 import collectionManagement.CollectionPrinter;
+import collectionManagement.CollectionSaver;
 import collectionManagement.CommandsExecutor;
 import io.consoleIO.CommandParser;
+import io.consoleIO.ConfirmationReader;
 import io.fileIO.in.HumanBeingXMLParser;
 import io.fileIO.in.Parser;
+import io.fileIO.out.HumanBeingXMLWriter;
 import storedClasses.HumanBeing;
 
+import java.io.File;
 import java.util.LinkedHashMap;
 import java.util.Scanner;
 
@@ -30,20 +34,44 @@ public class Main {
         CollectionManager collectionManager = new CollectionManager();
         CollectionPrinter collectionPrinter = new CollectionPrinter();
 
+        CollectionSaver collectionSaver = new CollectionSaver(collectionManager, new HumanBeingXMLWriter());
+
         Parser<LinkedHashMap<Long, HumanBeing>> humanBeingXMLParser = new HumanBeingXMLParser();
         // collectionManager.setCollection(humanBeingXMLParser.parseDataToHashMap("src/dataFiles/data.xml"));
-        collectionManager.setCollection(humanBeingXMLParser.parseData(args[0]));
+
+        File savedCollection = new File("/tmp/s367054Lab5Saves/.save.xml");
+
+        if (savedCollection.exists()) {
+
+            System.out.println("At the last launch, the program completed its work unscheduled.\n" +
+                    "Do you want to download the previous data?");
+
+            ConfirmationReader confirmationReader = new ConfirmationReader();
+            String confirmation = confirmationReader.readObjectFromConsole();
+            if (confirmation.equals("Y")) {
+                collectionManager.setCollection(humanBeingXMLParser.parseData("/tmp/s367054Lab5Saves/.save.xml"));
+            } else {
+                collectionManager.setCollection(humanBeingXMLParser.parseData(args[0]));
+            }
+
+        } else {
+            collectionManager.setCollection(humanBeingXMLParser.parseData(args[0]));
+        }
+
+        // delete saves
+        savedCollection.delete();
 
         CommandsExecutor commandsExecutor = new CommandsExecutor(collectionManager, collectionPrinter);
         Scanner scanner = new Scanner(System.in);
         CommandParser commandParser = new CommandParser();
 
-        System.out.println( "If you want to see the list of available commands, enter 'help'");
+        System.out.println("If you want to see the list of available commands, enter 'help'");
 
         while (true) {
             try {
                 commandsExecutor.execute(commandParser.readObjectFromConsole(), "console", scanner);
             } catch (Exception e) {
+                collectionSaver.saveCollection();
                 System.out.println(e.getMessage());
             }
         }

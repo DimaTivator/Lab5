@@ -2,6 +2,7 @@ package commands;
 
 import collectionManagement.CollectionManager;
 import collectionManagement.CollectionPrinter;
+import collectionManagement.CommandsExecutor;
 
 /**
  Class that executes the commands from a script file.
@@ -13,15 +14,18 @@ public class ExecuteScriptCommand extends Command {
      */
     private final String filePath;
 
+    private CommandsExecutor commandsExecutor;
+
     /**
      Constructor with collection manager, collection printer, and file path arguments.
      @param collectionManager Collection manager that holds the collection.
      @param collectionPrinter Collection printer for printing collection information.
      @param filePath The path to the script file.
      */
-    public ExecuteScriptCommand(CollectionManager collectionManager, CollectionPrinter collectionPrinter, String filePath) {
+    public ExecuteScriptCommand(CollectionManager collectionManager, CollectionPrinter collectionPrinter, CommandsExecutor commandsExecutor, String filePath) {
         super(collectionManager, collectionPrinter);
         this.filePath = filePath;
+        this.commandsExecutor = commandsExecutor;
     }
 
     /**
@@ -31,6 +35,6 @@ public class ExecuteScriptCommand extends Command {
     @Override
     public void execute() throws Exception {
         ScriptExecutor scriptExecutor = new ScriptExecutor(getCollectionManager(), getCollectionPrinter());
-        scriptExecutor.executeScript(filePath);
+        scriptExecutor.executeScript(filePath, commandsExecutor);
     }
 }

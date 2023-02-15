@@ -46,7 +46,7 @@ public class HumanBeingXMLParser extends Parser<LinkedHashMap<Long, HumanBeing>>
         } catch (Exception e) {
             System.out.println(ConsoleColors.RED_BOLD + "Some troubles with xml file :(" + ConsoleColors.RESET);
             System.out.println(e.getMessage());
-            e.printStackTrace();
+            System.exit(0);
         }
 
         return null;

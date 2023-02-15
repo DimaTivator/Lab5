@@ -3,12 +3,16 @@ package commands;
 import collectionManagement.CollectionManager;
 import collectionManagement.CollectionPrinter;
 import collectionManagement.CommandsExecutor;
+import dataStructures.Pair;
+import exceptions.ScriptsRecursionException;
 import exceptions.commandExceptions.NoSuchCommandException;
 import io.consoleIO.CommandParser;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.HashSet;
 import java.util.Scanner;
+import java.util.Set;
 
 /**
  * The {@code ScriptExecutor} class provides the functionality to execute commands from a script file.
@@ -19,12 +23,12 @@ public class ScriptExecutor {
     /**
      * The {@code CollectionManager} object to manage the collection of data.
      */
-    CollectionManager collectionManager;
+    private CollectionManager collectionManager;
 
     /**
      * The {@code CollectionPrinter} object to print the collection data.
      */
-    CollectionPrinter collectionPrinter;
+    private CollectionPrinter collectionPrinter;
 
     /**
      * Constructs a {@code ScriptExecutor} object with the given {@code CollectionManager} and {@code CollectionPrinter} objects.
@@ -40,11 +44,10 @@ public class ScriptExecutor {
      * Executes the commands from the script file located at the given file path.
      * @param filePath the path to the script file.
      */
-    public void executeScript(String filePath) throws FileNotFoundException {
+    public void executeScript(String filePath, CommandsExecutor commandsExecutor) throws FileNotFoundException {
         File file = new File(filePath);
         Scanner fileScanner = new Scanner(file);
 
-        CommandsExecutor commandsExecutor = new CommandsExecutor(collectionManager, collectionPrinter);
         CommandParser commandParser = new CommandParser();
 
         while (true) {
@@ -52,7 +55,10 @@ public class ScriptExecutor {
                 commandsExecutor.execute(commandParser.parseCommandFromFile(fileScanner), "file", fileScanner);
             } catch (NoSuchCommandException e) {
                 System.out.println(e.getMessage());
-            } catch (Exception e) {
+            } catch (ScriptsRecursionException e) {
+                System.out.println(e.getMessage());
+                break;
+            } catch (Exception ignored) {
                 break;
             }
         }
