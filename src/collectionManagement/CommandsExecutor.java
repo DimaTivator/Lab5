@@ -39,7 +39,10 @@ public class CommandsExecutor {
      */
     private final CollectionManager collectionManager;
 
-    private Set<String> used_scripts = new HashSet<>();
+    /**
+     * The set with used files in the command `execute_script`
+     */
+    private final Set<String> used_scripts = new HashSet<>();
 
     /**
      * Constructs a `CommandsExecutor` object with the given `collectionManager` and `collectionPrinter`.
@@ -68,7 +71,7 @@ public class CommandsExecutor {
      * @param fileScanner the `Scanner` instance that reads the file
      * @return the `HumanBeing` object read from the file
      */
-    private HumanBeing getHumanBeingFromFile(Scanner fileScanner) {
+    private HumanBeing getHumanBeingFromFile(Scanner fileScanner) throws Exception {
         HumanBeingObjectFileReader humanBeingObjectFileReader = new HumanBeingObjectFileReader(fileScanner);
         return humanBeingObjectFileReader.readHumanBeingFromFile();
     }
@@ -207,14 +210,16 @@ public class CommandsExecutor {
                 if (args.length != 1) {
                     throw new InvalidArgumentsException();
                 }
+
                 if (used_scripts.contains(args[0])) {
-                    // System.out.println("SOS SOS SOS");
                     throw new ScriptsRecursionException("You should not call command `execute_script` recursively!");
                 }
+
                 used_scripts.add(args[0]);
+
                 Command executeScriptCommand = new ExecuteScriptCommand(collectionManager, collectionPrinter, this, args[0]);
                 executeScriptCommand.execute();
-                // used_scripts.forEach(System.out::println);
+
                 used_scripts.clear();
             }
 

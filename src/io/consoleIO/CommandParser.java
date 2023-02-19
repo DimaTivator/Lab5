@@ -65,7 +65,7 @@ public class CommandParser extends ConsoleReader<Pair<String, String[]>> {
 
         // System.out.println(line);
 
-        if (!commandsList.contains(line.get(0))) {
+        if (!commandsList.contains(line.get(0)) && !line.get(0).equals("")) {
             throw new NoSuchCommandException(String.format("Can't find command %s in commands list\n", line.get(0)) +
                     "Please try to enter command again\n");
         }

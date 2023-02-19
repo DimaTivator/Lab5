@@ -3,6 +3,7 @@ package commands;
 import collectionManagement.CollectionManager;
 import collectionManagement.CollectionPrinter;
 import collectionManagement.CommandsExecutor;
+import collectionManagement.ScriptExecutor;
 
 /**
  Class that executes the commands from a script file.

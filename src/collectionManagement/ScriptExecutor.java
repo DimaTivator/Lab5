@@ -1,4 +1,4 @@
-package commands;
+package collectionManagement;
 
 import collectionManagement.CollectionManager;
 import collectionManagement.CollectionPrinter;

@@ -83,80 +83,86 @@ public class HumanBeingObjectFileReader extends FileReader<HumanBeing> {
      *
      * @return a `HumanBeing` object created from data read from a file
      */
-    public HumanBeing readHumanBeingFromFile() {
+    public HumanBeing readHumanBeingFromFile() throws Exception {
+
+        HumanBeing humanBeing = new HumanBeing();
 
         String name;
-        while (true) {
-            try {
-                name = readNameFromFile();
-                break;
-            } catch (InvalidInputException e) {
-                System.out.print(e.getMessage());
-            }
-        }
+//        try {
+//            name = readNameFromFile();
+//            humanBeing.setName(name);
+//        } catch (InvalidInputException e) {
+//            System.out.print(e.getMessage());
+//        }
+        name = readNameFromFile();
+        humanBeing.setName(name);
 
 
         Coordinates coordinates;
         CoordinatesObjectFileReader coordinatesObjectFileReader = new CoordinatesObjectFileReader(fileScanner);
-        while (true) {
-            try {
-                coordinates = coordinatesObjectFileReader.readData();
-                break;
-            } catch (InvalidCoordinatesException | InvalidInputException e) {
-                System.out.print(e.getMessage());
-            }
-        }
+//        try {
+//            coordinates = coordinatesObjectFileReader.readData();
+//            humanBeing.setCoordinates(coordinates);
+//        } catch (InvalidCoordinatesException | InvalidInputException e) {
+//            System.out.print(e.getMessage());
+//        }
+        coordinates = coordinatesObjectFileReader.readData();
+        humanBeing.setCoordinates(coordinates);
 
 
         WeaponType weaponType;
         WeaponTypeFileReader weaponTypeFileReader = new WeaponTypeFileReader(fileScanner);
-        while (true) {
-            try {
-                weaponType = weaponTypeFileReader.readData();
-                break;
-            } catch (InvalidInputException e) {
-                System.out.print(e.getMessage());
-            }
-        }
+//        try {
+//            weaponType = weaponTypeFileReader.readData();
+//            humanBeing.setWeaponType(weaponType);
+//        } catch (InvalidInputException e) {
+//            System.out.print(e.getMessage());
+//        }
+        weaponType = weaponTypeFileReader.readData();
+        humanBeing.setWeaponType(weaponType);
 
 
         Mood mood;
         MoodFileReader moodFileReader = new MoodFileReader(fileScanner);
-        while (true) {
-            try {
-                mood = moodFileReader.readData();
-                break;
-            } catch (InvalidInputException e) {
-                System.out.print(e.getMessage());
-            }
-        }
-
-        HumanBeing humanBeing = new HumanBeing(name, mood, weaponType, coordinates);
+//        try {
+//            mood = moodFileReader.readData();
+//            humanBeing.setMood(mood);
+//        } catch (InvalidInputException e) {
+//            System.out.print(e.getMessage());
+//        }
+        mood = moodFileReader.readData();
+        humanBeing.setMood(mood);
 
 
-        try {
-            boolean realHero = readBooleanFromFile("realHero");
-            humanBeing.setRealHero(realHero);
-        } catch (InvalidInputException e) {
-            System.out.print(e.getMessage());
-        }
+//        try {
+//            boolean realHero = readBooleanFromFile("realHero");
+//            humanBeing.setRealHero(realHero);
+//        } catch (InvalidInputException e) {
+//            System.out.print(e.getMessage());
+//        }
+        boolean realHero = readBooleanFromFile("realHero");
+        humanBeing.setRealHero(realHero);
 
 
 
-        try {
-            boolean hasToothpick = readBooleanFromFile("hasToothpick");
-            humanBeing.setHasToothpick(hasToothpick);
-        } catch (InvalidInputException e) {
-            System.out.print(e.getMessage());
-        }
+//        try {
+//            boolean hasToothpick = readBooleanFromFile("hasToothpick");
+//            humanBeing.setHasToothpick(hasToothpick);
+//        } catch (InvalidInputException e) {
+//            System.out.print(e.getMessage());
+//        }
+        boolean hasToothpick = readBooleanFromFile("hasToothpick");
+        humanBeing.setHasToothpick(hasToothpick);
 
 
-        try {
-            double impactSpeed = readDoubleFromFile("impactSpeed");
-            humanBeing.setImpactSpeed(impactSpeed);
-        } catch (InvalidInputException e) {
-            System.out.print(e.getMessage());
-        }
+//        try {
+//            double impactSpeed = readDoubleFromFile("impactSpeed");
+//            humanBeing.setImpactSpeed(impactSpeed);
+//        } catch (InvalidInputException e) {
+//            System.out.print(e.getMessage());
+//        }
+        double impactSpeed = readDoubleFromFile("impactSpeed");
+        humanBeing.setImpactSpeed(impactSpeed);
 
 
         Car car;

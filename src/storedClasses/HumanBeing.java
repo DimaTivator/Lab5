@@ -102,6 +102,14 @@ public class HumanBeing implements Comparable<HumanBeing> {
     }
 
     /**
+     * Sets name of the HumanBeing object
+     * @param name the name
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    /**
      * Returns the name of this HumanBeing object.
      * @return the name
      */
