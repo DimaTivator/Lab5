@@ -33,7 +33,7 @@ public class MoodConsoleReader extends ConsoleReader<Mood> {
             System.out.println(mood);
         }
 
-        String input = scanner.nextLine().toUpperCase();
+        String input = scanner.nextLine().toUpperCase().strip();
 
         if (!moodList.contains(input)) {
             throw new InvalidInputException("You should choose mood from the available moods!\nPlease try again\n");

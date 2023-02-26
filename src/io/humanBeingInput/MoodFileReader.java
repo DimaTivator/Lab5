@@ -37,7 +37,7 @@ public class MoodFileReader  extends FileReader<Mood> {
         List<String> moodList = new ArrayList<>();
         Arrays.stream(Mood.values()).toList().forEach(mood -> moodList.add(mood.toString()));
 
-        String mood = fileScanner.nextLine().toUpperCase();
+        String mood = fileScanner.nextLine().toUpperCase().strip();
 
         if (!moodList.contains(mood)) {
             throw new InvalidInputException("You should choose mood from the available moods!\nPlease try again\n");

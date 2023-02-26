@@ -88,7 +88,6 @@ public class HumanBeingXMLParser extends Parser<LinkedHashMap<Long, HumanBeing>>
 
                             String name = parseName(eElement);
                             Coordinates coordinates = parseCoordinates((Element) eElement.getElementsByTagName("coordinates").item(i));
-                            Car car = parseCar((Element) eElement.getElementsByTagName("car").item(i));
                             WeaponType weaponType = parseWeaponType(eElement);
                             Mood mood = parseMood(eElement);
 
@@ -109,7 +108,10 @@ public class HumanBeingXMLParser extends Parser<LinkedHashMap<Long, HumanBeing>>
                                 obj.setImpactSpeed(impactSpeed);
                             } catch (Exception ignored) {}
 
-                            obj.setCar(car);
+                            try {
+                                Car car = parseCar((Element) eElement.getElementsByTagName("car").item(i));
+                                obj.setCar(car);
+                            } catch (Exception ignored) {}
 
                             humanBeings.put(obj.getId(), obj);
                         }
@@ -119,7 +121,6 @@ public class HumanBeingXMLParser extends Parser<LinkedHashMap<Long, HumanBeing>>
         } catch (Exception e) {
             System.out.println(ConsoleColors.RED_BOLD + "Some troubles with xml file :(" + ConsoleColors.RESET);
             System.out.println(e.getMessage());
-            e.printStackTrace();
         }
 
         return humanBeings;

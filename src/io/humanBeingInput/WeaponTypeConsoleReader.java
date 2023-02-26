@@ -35,7 +35,7 @@ public class WeaponTypeConsoleReader extends ConsoleReader<WeaponType> {
             System.out.println(weaponType);
         }
 
-        String input = scanner.nextLine().toUpperCase();
+        String input = scanner.nextLine().toUpperCase().strip();
 
         if (!weaponTypeList.contains(input)) {
             throw new InvalidInputException("You should choose mood from the available weapon types!\nPlease try again\n");

@@ -34,7 +34,7 @@ public class WeaponTypeFileReader extends FileReader<WeaponType> {
         List<String> weaponTypeList = new ArrayList<>();
         Arrays.stream(WeaponType.values()).toList().forEach(mood -> weaponTypeList.add(mood.toString()));
 
-        String weaponType = scanner.nextLine().toUpperCase();
+        String weaponType = scanner.nextLine().toUpperCase().strip();
 
         if (!weaponTypeList.contains(weaponType)) {
             throw new InvalidInputException("You should choose mood from the available weapon types!\nPlease try again\n");
