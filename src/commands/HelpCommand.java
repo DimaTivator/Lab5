@@ -10,7 +10,7 @@ import java.util.Map;
  * The HelpCommand class implements the behavior for the "help" command.
  * This command is used to display the available commands in the system and their descriptions.
  */
-public class HelpCommand extends Command {
+public class HelpCommand extends CommandTemplate {
 
     /**
      Constructs a HelpCommand object.
@@ -25,7 +25,6 @@ public class HelpCommand extends Command {
      */
     @Override
     public void execute() {
-        CollectionManager collectionManager = getCollectionManager();
         CollectionPrinter collectionPrinter = getCollectionPrinter();
         Map<String, String> commands = collectionPrinter.getCommands();
 

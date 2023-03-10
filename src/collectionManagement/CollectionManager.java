@@ -65,94 +65,94 @@ public class CollectionManager {
      * @param key the key to use for the insertion.
      * @param value the {@link storedClasses.HumanBeing} object to insert.
      */
-    public void insertElement(Long key, HumanBeing value) {
-        try {
-            Command insertCommand = new InsertCommand(this, key, value);
-            insertCommand.execute();
-        } catch (Exception ignored) {}
-    }
-
-    /**
-     * Updates the value in the collection for the specified key.
-     *
-     * @param key the key to use for the update.
-     * @param newValue the new {@link storedClasses.HumanBeing} object to update.
-     */
-    public void updateValueByKey(Long key, HumanBeing newValue) {
-        try {
-            Command updateCommand = new UpdateCommand(this, key, newValue);
-            updateCommand.execute();
-        } catch (Exception ignored) {}
-    }
-
-    /**
-     * Removes the value from the collection for the specified key.
-     *
-     * @param key the key to use for the removal.
-     */
-    public void removeByKey(Long key) {
-        try {
-            Command removeKeyCommand = new RemoveKeyCommand(this, key);
-            removeKeyCommand.execute();
-        } catch (Exception ignored) {}
-    }
-
-    /**
-     * Clears the collection.
-     * Creates a ClearCollectionCommand object and executes it.
-     * Any exception thrown is caught and ignored.
-     */
-    public void clearCollection() {
-        try {
-            Command clearCollectionCommand = new ClearCollectionCommand(this);
-            clearCollectionCommand.execute();
-        } catch (Exception ignored) {}
-    }
-
-    /**
-     * Removes all elements in the collection that have a key less than the specified value.
-     * Creates a RemoveLowerCommand object and executes it.
-     * Any exception thrown is printed to the console.
-     *
-     * @param value the specified value to compare keys against
-     */
-    public void removeLower(HumanBeing value) {
-        try {
-            Command removeLowerCommand = new RemoveLowerCommand(this, value);
-            removeLowerCommand.execute();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
-    /**
-     * Replaces the value of the element with the specified key if it is greater than the current value.
-     * Creates a ReplaceIfGreaterCommand object and executes it.
-     * Any exception thrown is caught and ignored.
-     *
-     * @param key the key of the element to replace
-     * @param value the new value to replace the current value with
-     */
-    public void replaceIfGreater(Long key, HumanBeing value) {
-        try {
-            Command replaceIfGreaterCommand = new ReplaceIfGreaterCommand(this, key, value);
-            replaceIfGreaterCommand.execute();
-        } catch (Exception ignored) {}
-    }
-
-    /**
-     * Removes all elements in the collection that have a key greater than the specified value.
-     * Creates a RemoveGreaterKeyCommand object and executes it.
-     * Any exception thrown is printed to the console.
-     *
-     * @param key the specified key to compare keys against
-     */
-    public void removeGreaterKey(Long key) {
-        try {
-            Command removeGreaterKeyCommand = new RemoveGreaterKeyCommand(this, key);
-            removeGreaterKeyCommand.execute();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-    }
+//    public void insertElement(Long key, HumanBeing value) {
+//        try {
+//            CommandTemplate insertCommand = new InsertCommand(this, key, value);
+//            insertCommand.execute();
+//        } catch (Exception ignored) {}
+//    }
+//
+//    /**
+//     * Updates the value in the collection for the specified key.
+//     *
+//     * @param id the id to use for the update.
+//     * @param newValue the new {@link storedClasses.HumanBeing} object to update.
+//     */
+//    public void updateValueById(Long id, HumanBeing newValue) {
+//        try {
+//            CommandTemplate updateCommand = new UpdateCommand(this, id, newValue);
+//            updateCommand.execute();
+//        } catch (Exception ignored) {}
+//    }
+//
+//    /**
+//     * Removes the value from the collection for the specified key.
+//     *
+//     * @param key the key to use for the removal.
+//     */
+//    public void removeByKey(Long key) {
+//        try {
+//            CommandTemplate removeKeyCommand = new RemoveKeyCommand(this, key);
+//            removeKeyCommand.execute();
+//        } catch (Exception ignored) {}
+//    }
+//
+//    /**
+//     * Clears the collection.
+//     * Creates a ClearCollectionCommand object and executes it.
+//     * Any exception thrown is caught and ignored.
+//     */
+//    public void clearCollection() {
+//        try {
+//            CommandTemplate clearCollectionCommand = new ClearCollectionCommand(this);
+//            clearCollectionCommand.execute();
+//        } catch (Exception ignored) {}
+//    }
+//
+//    /**
+//     * Removes all elements in the collection that have a key less than the specified value.
+//     * Creates a RemoveLowerCommand object and executes it.
+//     * Any exception thrown is printed to the console.
+//     *
+//     * @param value the specified value to compare keys against
+//     */
+//    public void removeLower(HumanBeing value) {
+//        try {
+//            CommandTemplate removeLowerCommand = new RemoveLowerCommand(this, value);
+//            removeLowerCommand.execute();
+//        } catch (Exception e) {
+//            System.out.println(e.getMessage());
+//        }
+//    }
+//
+//    /**
+//     * Replaces the value of the element with the specified key if it is greater than the current value.
+//     * Creates a ReplaceIfGreaterCommand object and executes it.
+//     * Any exception thrown is caught and ignored.
+//     *
+//     * @param key the key of the element to replace
+//     * @param value the new value to replace the current value with
+//     */
+//    public void replaceIfGreater(Long key, HumanBeing value) {
+//        try {
+//            CommandTemplate replaceIfGreaterCommand = new ReplaceIfGreaterCommand(this, key, value);
+//            replaceIfGreaterCommand.execute();
+//        } catch (Exception ignored) {}
+//    }
+//
+//    /**
+//     * Removes all elements in the collection that have a key greater than the specified value.
+//     * Creates a RemoveGreaterKeyCommand object and executes it.
+//     * Any exception thrown is printed to the console.
+//     *
+//     * @param key the specified key to compare keys against
+//     */
+//    public void removeGreaterKey(Long key) {
+//        try {
+//            CommandTemplate removeGreaterKeyCommand = new RemoveGreaterKeyCommand(this, key);
+//            removeGreaterKeyCommand.execute();
+//        } catch (Exception e) {
+//            System.out.println(e.getMessage());
+//        }
+//    }
 }

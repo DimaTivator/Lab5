@@ -24,7 +24,7 @@ public class HumanBeing implements Comparable<HumanBeing> {
      * Creation date of this HumanBeing object. Cannot be null.
      * Value is generated automatically.
      */
-    private final java.time.LocalDate creationDate;
+    private java.time.LocalDate creationDate;
     /**
      * Indicates whether this human being is a real hero.
      */
@@ -83,6 +83,10 @@ public class HumanBeing implements Comparable<HumanBeing> {
         creationDate = java.time.LocalDate.now();
 
         id = generateId();
+    }
+
+    public void setCreationDate(java.time.LocalDate date) {
+        creationDate = date;
     }
 
     /**
@@ -270,5 +274,12 @@ public class HumanBeing implements Comparable<HumanBeing> {
                 fieldToString("hasToothpick", hasToothpick) +
                 fieldToString("impact speed", impactSpeed) +
                 fieldToString("car", car);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj.getClass() != this.getClass()) return false;
+        return id.equals(((HumanBeing) obj).getId());
     }
 }

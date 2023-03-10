@@ -8,7 +8,13 @@ import java.io.File;
 /**
  This class represents the "exit" command in the program
  */
-public class ExitCommand extends Command {
+public class ExitCommand extends CommandTemplate {
+
+    private boolean collectionChanged;
+
+    public void setCollectionChanged(boolean collectionChanged) {
+        this.collectionChanged = collectionChanged;
+    }
 
     /**
      Constructor for the {@code ExitCommand} class
@@ -21,15 +27,20 @@ public class ExitCommand extends Command {
      */
     @Override
     public void execute() {
-        System.out.println("The program will end without saving the data");
-        ConfirmationReader confirmationReader = new ConfirmationReader();
-        String confirmation = confirmationReader.readObjectFromConsole();
-        if (confirmation.equals("Y")) {
+        if (collectionChanged) {
+            System.out.println("The program will end without saving the data");
+            ConfirmationReader confirmationReader = new ConfirmationReader();
+            String confirmation = confirmationReader.readObjectFromConsole();
+            if (confirmation.equals("Y")) {
+                System.out.println(ConsoleColors.PURPLE + "Bye!" + ConsoleColors.RESET);
+
+                File saveInTmp = new File("/tmp/s367054Lab5Saves/.save.xml");
+                boolean ignored = saveInTmp.delete();
+
+                System.exit(0);
+            }
+        } else {
             System.out.println(ConsoleColors.PURPLE + "Bye!" + ConsoleColors.RESET);
-
-            File saveInTmp = new File("/tmp/s367054Lab5Saves/.save.xml");
-            boolean ignored = saveInTmp.delete();
-
             System.exit(0);
         }
     }

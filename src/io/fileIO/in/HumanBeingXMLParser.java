@@ -94,6 +94,11 @@ public class HumanBeingXMLParser extends Parser<LinkedHashMap<Long, HumanBeing>>
                             HumanBeing obj = new HumanBeing(name, mood, weaponType, coordinates);
 
                             try {
+                                java.time.LocalDate date = java.time.LocalDate.parse(eElement.getElementsByTagName("creationDate").item(0).getTextContent());
+                                obj.setCreationDate(date);
+                            } catch (Exception ignored) {};
+
+                            try {
                                 boolean realHero = Boolean.parseBoolean(eElement.getElementsByTagName("realHero").item(0).getTextContent());
                                 obj.setRealHero(realHero);
                             } catch (Exception ignored) {}

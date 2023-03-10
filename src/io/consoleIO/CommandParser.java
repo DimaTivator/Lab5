@@ -4,10 +4,7 @@ import auxiliaryClasses.ConsoleColors;
 import dataStructures.Pair;
 import exceptions.commandExceptions.NoSuchCommandException;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * The {@code CommandParser} class is a console reader that is used to parse commands and arguments from the console or

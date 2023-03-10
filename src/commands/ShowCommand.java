@@ -9,7 +9,7 @@ import java.util.Map;
 /**
  * Class representing the ShowCommand, which extends the Command class.
  */
-public class ShowCommand extends Command {
+public class ShowCommand extends CommandTemplate {
 
     /**
      * Constructor that takes in a CollectionManager object.

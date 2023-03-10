@@ -1,6 +1,7 @@
 package commands;
 
 import collectionManagement.CollectionManager;
+import exceptions.commandExceptions.InvalidArgumentsException;
 import storedClasses.HumanBeing;
 
 import java.util.Map;
@@ -9,29 +10,30 @@ import java.util.Map;
  * InsertCommand is a class that extends the Command class and provides an implementation for
  * inserting an element into the collection.
  */
-public class InsertCommand extends Command {
-
-    /**
-     * The key of the element that needs to be inserted
-     */
-    private final Long key;
-
-    /*
-     * The value of the element that needs to be inserted
-     */
-    private final HumanBeing value;
+public class InsertCommand extends CommandTemplate {
 
     /**
      * Constructor for the InsertCommand class
      *
      * @param collectionManager the CollectionManager instance to get the collection from
-     * @param key the key of the element to be inserted
-     * @param value the value of the element to be inserted
      */
-    public InsertCommand(CollectionManager collectionManager, Long key, HumanBeing value) {
+    public InsertCommand(CollectionManager collectionManager) {
         super(collectionManager);
-        this.key = key;
-        this.value = value;
+    }
+
+    @Override
+    public void setArg(String arg) throws InvalidArgumentsException {
+        Long key;
+        try {
+            key = Long.parseLong(arg);
+            super.setArg(String.valueOf(key));
+        } catch (NumberFormatException e) {
+            throw new InvalidArgumentsException("The key must be a number! Please Try to enter a command again");
+        }
+
+        if (getCollectionManager().getCollection().containsKey(key)) {
+            throw new InvalidArgumentsException("Collection already contains this key!\nPlease try to enter a command again");
+        }
     }
 
     /**
@@ -39,8 +41,8 @@ public class InsertCommand extends Command {
      * to insert the element into the collection.
      */
     @Override
-    public void execute() {
+    public void execute() throws InvalidArgumentsException {
         Map<Long, HumanBeing> data = getCollectionManager().getCollection();
-        data.put(key, value);
+        data.put(Long.parseLong(getArg()), (HumanBeing) getValue());
     }
 }

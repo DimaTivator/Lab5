@@ -61,100 +61,100 @@ public class CollectionPrinter {
     /**
      * Prints information about the collection: type of collection, date of initialization and th number of objects in it
      */
-    public void printCollectionInfo(CollectionManager collectionManager) {
-        try {
-            Command infoCommand = new InfoCommand(collectionManager, this);
-            infoCommand.execute();
-        } catch (Exception ignored) {}
-    }
+//    public void printCollectionInfo(CollectionManager collectionManager) {
+//        try {
+//            CommandTemplate infoCommand = new InfoCommand(collectionManager, this);
+//            infoCommand.execute();
+//        } catch (Exception ignored) {}
+//    }
 
     /**
      * Method prints the collection managed by the {@code collectionManager} object.
      * @param collectionManager the collection manager that manages the collection to print the unique moods of the elements
      */
-    public void printCollection(CollectionManager collectionManager) {
-        try {
-            Command showCommand = new ShowCommand(collectionManager);
-            showCommand.execute();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
-    /**
-     * The {@code printUniqueMood} method prints the unique moods of the elements in the collection managed by the
-     * {@code collectionManager} object.
-     * @param collectionManager the collection manager that manages the collection to print the unique moods of the elements
-     */
-    public void printUniqueMood(CollectionManager collectionManager) {
-        try {
-            Command printUniqueMoodCommand = new PrintUniqueMoodCommand(collectionManager);
-            printUniqueMoodCommand.execute();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
-    /**
-     * The {@code countLessThanImpactSpeed} method counts the number of elements in the collection managed by the
-     * {@code collectionManager} object that have impact speed less than the specified {@code impactSpeed}.
-     * @param collectionManager the collection manager that manages the collection to count the number of elements with impact speed less than the specified value
-     * @param impactSpeed the maximum impact speed to consider when counting elements
-     */
-    public void countLessThanImpactSpeed(CollectionManager collectionManager, Double impactSpeed) {
-        try {
-            Command countLessThanImpactSpeedCommand = new CountLessThanImpactSpeedCommand(collectionManager, impactSpeed);
-            countLessThanImpactSpeedCommand.execute();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
-    /**
-     * The {@code filterLessThanCar} method filters the elements in the collection managed by the
-     * {@code collectionManager} object that have specifications less than those of the specified {@code car}.
-     * @param collectionManager the collection manager that manages the collection to filter the elements with specifications less than those of the specified car
-     * @param car the car whose specifications will be used as a comparison to filter the elements in the collection
-     */
-    public void filterLessThanCar(CollectionManager collectionManager, Car car) {
-        try {
-            Command filterLessThanCarCommand = new FilterLessThanCarCommand(collectionManager, car);
-            filterLessThanCarCommand.execute();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
-    /**
-     Saves the current collection to a file using the default file path.
-     @param collectionManager the {@link CollectionManager} instance to use for saving the collection
-     */
-    public void saveCollectionToFile(CollectionManager collectionManager) {
-        try {
-            Command saveCollectionToFileCommand = new SaveCollectionToFileCommand(collectionManager);
-            saveCollectionToFileCommand.execute();
-        } catch (Exception ignored) {}
-    }
-
-    /**
-     Saves the current collection to a file using the specified file path.
-     @param collectionManager the {@link CollectionManager} instance to use for saving the collection
-     @param filePath the file path to save the collection to
-     */
-    public void saveCollectionToFile(CollectionManager collectionManager, String filePath) {
-        try {
-            Command saveCollectionToFileCommand = new SaveCollectionToFileCommand(collectionManager, filePath);
-            saveCollectionToFileCommand.execute();
-        } catch (Exception ignored) {}
-    }
-
-    /**
-     Prints the help message for the program.
-     */
-    public void printHelp() {
-        try {
-            Command helpCommand = new HelpCommand(this);
-            helpCommand.execute();
-        } catch (Exception ignored) {}
-    }
+//    public void printCollection(CollectionManager collectionManager) {
+//        try {
+//            CommandTemplate showCommand = new ShowCommand(collectionManager);
+//            showCommand.execute();
+//        } catch (Exception e) {
+//            System.out.println(e.getMessage());
+//        }
+//    }
+//
+//    /**
+//     * The {@code printUniqueMood} method prints the unique moods of the elements in the collection managed by the
+//     * {@code collectionManager} object.
+//     * @param collectionManager the collection manager that manages the collection to print the unique moods of the elements
+//     */
+//    public void printUniqueMood(CollectionManager collectionManager) {
+//        try {
+//            CommandTemplate printUniqueMoodCommand = new PrintUniqueMoodCommand(collectionManager);
+//            printUniqueMoodCommand.execute();
+//        } catch (Exception e) {
+//            System.out.println(e.getMessage());
+//        }
+//    }
+//
+//    /**
+//     * The {@code countLessThanImpactSpeed} method counts the number of elements in the collection managed by the
+//     * {@code collectionManager} object that have impact speed less than the specified {@code impactSpeed}.
+//     * @param collectionManager the collection manager that manages the collection to count the number of elements with impact speed less than the specified value
+//     * @param impactSpeed the maximum impact speed to consider when counting elements
+//     */
+//    public void countLessThanImpactSpeed(CollectionManager collectionManager, Double impactSpeed) {
+//        try {
+//            CommandTemplate countLessThanImpactSpeedCommand = new CountLessThanImpactSpeedCommand(collectionManager, impactSpeed);
+//            countLessThanImpactSpeedCommand.execute();
+//        } catch (Exception e) {
+//            System.out.println(e.getMessage());
+//        }
+//    }
+//
+//    /**
+//     * The {@code filterLessThanCar} method filters the elements in the collection managed by the
+//     * {@code collectionManager} object that have specifications less than those of the specified {@code car}.
+//     * @param collectionManager the collection manager that manages the collection to filter the elements with specifications less than those of the specified car
+//     * @param car the car whose specifications will be used as a comparison to filter the elements in the collection
+//     */
+//    public void filterLessThanCar(CollectionManager collectionManager, Car car) {
+//        try {
+//            CommandTemplate filterLessThanCarCommand = new FilterLessThanCarCommand(collectionManager, car);
+//            filterLessThanCarCommand.execute();
+//        } catch (Exception e) {
+//            System.out.println(e.getMessage());
+//        }
+//    }
+//
+//    /**
+//     Saves the current collection to a file using the default file path.
+//     @param collectionManager the {@link CollectionManager} instance to use for saving the collection
+//     */
+//    public void saveCollectionToFile(CollectionManager collectionManager) {
+//        try {
+//            CommandTemplate saveCollectionToFileCommand = new SaveCollectionToFileCommand(collectionManager);
+//            saveCollectionToFileCommand.execute();
+//        } catch (Exception ignored) {}
+//    }
+//
+//    /**
+//     Saves the current collection to a file using the specified file path.
+//     @param collectionManager the {@link CollectionManager} instance to use for saving the collection
+//     @param filePath the file path to save the collection to
+//     */
+//    public void saveCollectionToFile(CollectionManager collectionManager, String filePath) {
+//        try {
+//            CommandTemplate saveCollectionToFileCommand = new SaveCollectionToFileCommand(collectionManager, filePath);
+//            saveCollectionToFileCommand.execute();
+//        } catch (Exception ignored) {}
+//    }
+//
+//    /**
+//     Prints the help message for the program.
+//     */
+//    public void printHelp() {
+//        try {
+//            CommandTemplate helpCommand = new HelpCommand(this);
+//            helpCommand.execute();
+//        } catch (Exception ignored) {}
+//    }
 }

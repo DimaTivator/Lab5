@@ -2,7 +2,7 @@ import auxiliaryClasses.ConsoleColors;
 import collectionManagement.CollectionManager;
 import collectionManagement.CollectionPrinter;
 import collectionManagement.CollectionSaver;
-import collectionManagement.CommandsExecutor;
+import commands.CommandsExecutor;
 import io.consoleIO.CommandParser;
 import io.consoleIO.ConfirmationReader;
 import io.fileIO.in.HumanBeingXMLParser;
@@ -12,6 +12,7 @@ import storedClasses.HumanBeing;
 
 import java.io.File;
 import java.util.LinkedHashMap;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 /**
@@ -70,6 +71,8 @@ public class Main {
         while (true) {
             try {
                 commandsExecutor.execute(commandParser.readObjectFromConsole(), "console", scanner);
+            } catch (NoSuchElementException e) {
+                break;
             } catch (Exception e) {
                 collectionSaver.saveCollection();
                 System.out.println(e.getMessage());

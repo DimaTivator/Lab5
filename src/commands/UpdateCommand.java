@@ -1,7 +1,7 @@
 package commands;
 
 import collectionManagement.CollectionManager;
-import exceptions.NoSuchKeyException;
+import exceptions.commandExceptions.InvalidArgumentsException;
 import storedClasses.HumanBeing;
 
 import java.util.Map;
@@ -9,35 +9,54 @@ import java.util.Map;
 /**
  The UpdateCommand class updates the value of an existing key in the collection.
  */
-public class UpdateCommand extends Command {
+public class UpdateCommand extends CommandTemplate {
 
-    /**
-     * The key to update the value of.
-     */
-    private final Long key;
-
-    /**
-     * The new value to set for the key.
-     */
-    private final HumanBeing newValue;
     /**
      * Constructs a new UpdateCommand instance.
      * @param collectionManager The CollectionManager to execute the command on.
-     * @param key The key to update the value of.
-     * @param newValue The new value to set for the key.
      */
-    public UpdateCommand(CollectionManager collectionManager, Long key, HumanBeing newValue) {
+    public UpdateCommand(CollectionManager collectionManager) {
         super(collectionManager);
-        this.key = key;
-        this.newValue = newValue;
     }
+
+    @Override
+    public void setArg(String arg) throws InvalidArgumentsException {
+        Long id;
+        try {
+            id = Long.parseLong(arg);
+            super.setArg(String.valueOf(id));
+        } catch (NumberFormatException e) {
+            throw new InvalidArgumentsException("The key must be a number! Please Try to enter a command again");
+        }
+
+        Map <Long, HumanBeing> data = getCollectionManager().getCollection();
+        boolean containsId = false;
+        for (Long key : data.keySet()) {
+            if (id.equals(data.get(key).getId())) {
+                containsId = true;
+                break;
+            }
+        }
+
+        if (!containsId) {
+            throw new InvalidArgumentsException("Can't find the entered id in collection:(\nPlease try to enter the command again");
+        }
+    }
+
     /**
      * Executes the UpdateCommand. This method updates the value of an existing key in the collection.
-     * @throws NoSuchKeyException If the specified key does not exist in the collection.
      */
     @Override
-    public void execute() throws NoSuchKeyException {
+    public void execute() throws InvalidArgumentsException {
         Map<Long, HumanBeing> data = getCollectionManager().getCollection();
-        data.put(key, newValue);
+        Long id = Long.parseLong(getArg());
+        HumanBeing newValue = (HumanBeing) getValue();
+
+        for (Long key : data.keySet()) {
+            if (id.equals(data.get(key).getId())) {
+                data.put(key, newValue);
+                break;
+            }
+        }
     }
 }

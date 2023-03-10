@@ -1,18 +1,13 @@
 package collectionManagement;
 
-import collectionManagement.CollectionManager;
-import collectionManagement.CollectionPrinter;
-import collectionManagement.CommandsExecutor;
-import dataStructures.Pair;
+import commands.CommandsExecutor;
 import exceptions.ScriptsRecursionException;
 import exceptions.commandExceptions.NoSuchCommandException;
 import io.consoleIO.CommandParser;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.HashSet;
 import java.util.Scanner;
-import java.util.Set;
 
 /**
  * The {@code ScriptExecutor} class provides the functionality to execute commands from a script file.

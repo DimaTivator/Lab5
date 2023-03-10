@@ -14,13 +14,12 @@ import java.util.Map;
 /**
  PrintUniqueMoodCommand class is responsible for printing unique moods of the HumanBeing objects in the collection.
  */
-public class PrintUniqueMoodCommand extends Command {
+public class PrintUniqueMoodCommand extends CommandTemplate {
 
     /**
      Constructor for the PrintUniqueMoodCommand class.
      @param collectionManager instance of the CollectionManager class
      */
-
     public PrintUniqueMoodCommand(CollectionManager collectionManager) {
         super(collectionManager);
     }

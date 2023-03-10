@@ -10,7 +10,7 @@ import java.util.Map;
  * The class uses the CollectionManager to access the data.
  * The class extends the abstract class "Command"
  */
-public class ClearCollectionCommand extends Command {
+public class ClearCollectionCommand extends CommandTemplate {
 
     /**
      Constructor for ClearCollectionCommand class.

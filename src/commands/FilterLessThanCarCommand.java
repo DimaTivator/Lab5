@@ -12,21 +12,14 @@ import java.util.Map;
  * The FilterLessThanCarCommand class implements a command to filter the elements of the collection
  * whose car field value is less than the specified one.
  */
-public class FilterLessThanCarCommand extends Command {
-
-    /**
-     The car to be compared with.
-     */
-    private final Car car;
+public class FilterLessThanCarCommand extends CommandTemplate {
 
     /**
      * Creates a new instance of the FilterLessThanCarCommand class.
      * @param collectionManager the CollectionManager instance to manage the collection.
-     * @param car the car to be compared with.
      */
-    public FilterLessThanCarCommand(CollectionManager collectionManager, Car car) {
+    public FilterLessThanCarCommand(CollectionManager collectionManager) {
         super(collectionManager);
-        this.car = car;
     }
 
     /**
@@ -37,6 +30,7 @@ public class FilterLessThanCarCommand extends Command {
     @Override
     public void execute() throws EmptyCollectionException {
         Map<Long, HumanBeing> data = getCollectionManager().getCollection();
+        Car car = (Car) getValue();
 
         if (data.isEmpty()) {
             throw new EmptyCollectionException();
