@@ -193,7 +193,11 @@ public class CommandsExecutor {
             try {
                 command.setArg(args[0]);
                 if (humanBeingCommandsList.contains(commandName)) {
-                    command.setValue(getHumanBeingFromConsole());
+                    if (stream.equals("console")) {
+                        command.setValue(getHumanBeingFromConsole());
+                    } else {
+                        command.setValue(getHumanBeingFromFile(scanner));
+                    }
                 }
                 command.execute();
             } catch (Exception e) {
@@ -202,7 +206,11 @@ public class CommandsExecutor {
 
         }
         else if (humanBeingCommandsList.contains(commandName)) {
-            command.setValue(getHumanBeingFromConsole());
+            if (stream.equals("console")) {
+                command.setValue(getHumanBeingFromConsole());
+            } else {
+                command.setValue(getHumanBeingFromFile(scanner));
+            }
             command.execute();
         }
         else {
